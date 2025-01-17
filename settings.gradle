@@ -1,5 +1,5 @@
 rootProject.name = 'car-service-network'
-include 'config-server'
+include 'server'
 include 'gateway'
 include 'user-service'
 include 'schedule-service'
