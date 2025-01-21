@@ -1,20 +1,24 @@
 package com.example.user_service.controller;
 
+import com.example.user_service.UserService;
+import com.example.user_service.entity.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 @RestController
 public class UserController {
-    private final RestTemplate restTemplate;
+    private final UserService userService;
 
-    public UserController(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
-    @GetMapping("/call-user-service")
-    public String callUserService() {
-        return restTemplate.getForObject("http://user-service/api/", String.class);
+    @GetMapping("/get_user")
+    public User getUserByEmail(@RequestParam String email) {
+        return userService.getUserByEmail(email);
     }
-
 }
