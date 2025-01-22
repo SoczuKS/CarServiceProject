@@ -1,6 +1,6 @@
 package com.example.service_work_service.entity;
 
-import com.example.service_work_service.dto.ScheduleDTO;
+import com.dto.ScheduleDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

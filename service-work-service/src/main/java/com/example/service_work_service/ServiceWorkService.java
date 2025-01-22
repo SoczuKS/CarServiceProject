@@ -1,18 +1,19 @@
 package com.example.service_work_service;
 
+import com.dto.ScheduleDTO;
 import com.example.service_work_service.client.ScheduleClient;
-import com.example.service_work_service.dto.ScheduleDTO;
 import com.example.service_work_service.entity.ServiceWork;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ServiceWorkService {
-    @Autowired
-    private ScheduleClient scheduleClient;
+    private final ScheduleClient scheduleClient;
+    private final ServiceWorkRepository serviceWorkRepository;
 
-    @Autowired
-    private ServiceWorkRepository serviceWorkRepository;
+    public ServiceWorkService(ScheduleClient scheduleClient, ServiceWorkRepository serviceWorkRepository) {
+        this.scheduleClient = scheduleClient;
+        this.serviceWorkRepository = serviceWorkRepository;
+    }
 
     public ScheduleDTO getSchedule(int scheduleId) {
         return scheduleClient.getScheduleById(scheduleId);

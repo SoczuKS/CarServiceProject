@@ -1,1 +1,3 @@
 rootProject.name = 'service-work-service'
+include 'dto'
+
