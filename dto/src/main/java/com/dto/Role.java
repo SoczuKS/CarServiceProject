@@ -1,4 +1,4 @@
-package com.example.user_service.entity;
+package com.dto;
 
 public enum Role {
     ADMIN,
