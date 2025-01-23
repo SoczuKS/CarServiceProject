@@ -1,20 +1,22 @@
 package com.example.inventory_service.controller;
 
+import com.example.inventory_service.ScheduleServiceClient;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
 @RestController
+@RequestMapping("/inventory")
 public class InventoryController {
+    private final ScheduleServiceClient scheduleServiceClient;
 
-    private final RestTemplate restTemplate;
-
-    public InventoryController(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
+    public InventoryController(ScheduleServiceClient scheduleServiceClient) {
+        this.scheduleServiceClient = scheduleServiceClient;
     }
 
-    @GetMapping("/call-inventory-service")
-    public String callUserService() {
-        return restTemplate.getForObject("http://inventory-service/api/item", String.class);
+    @GetMapping("/check")
+    public String checkInventory() {
+        String scheduleServiceResponse = scheduleServiceClient.getSchedule();
+        return "Inventory is available. Schedule Service Response: " + scheduleServiceResponse;
     }
 }
