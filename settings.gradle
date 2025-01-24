@@ -7,4 +7,5 @@ include 'service-work-service'
 include 'frontend-service'
 include 'service-service'
 include 'dto'
+include 'car-service'
 
