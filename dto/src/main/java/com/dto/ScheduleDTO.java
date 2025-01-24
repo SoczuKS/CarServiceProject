@@ -13,4 +13,7 @@ public class ScheduleDTO {
     private String name;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
+    private ScheduleStatus status;
+    private int userId;
+
 }

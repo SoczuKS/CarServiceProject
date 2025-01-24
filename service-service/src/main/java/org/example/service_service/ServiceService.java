@@ -7,6 +7,7 @@ import org.example.service_service.entity.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@org.springframework.stereotype.Service
 public class ServiceService {
     private final UserClient userClient;
     private final ServiceRepository serviceRepository;
@@ -14,6 +15,22 @@ public class ServiceService {
     public ServiceService(UserClient userClient, ServiceRepository serviceRepository) {
         this.userClient = userClient;
         this.serviceRepository = serviceRepository;
+    }
+
+    public Service getServiceByName(String name) {
+        return serviceRepository.findByName(name);
+    }
+
+    public Service getServiceByAddress(String address) {
+        return serviceRepository.findByAddress(address);
+    }
+
+    public List<Service> getServices() {
+        return serviceRepository.findAll();
+    }
+
+    public Service addService(Service service) {
+        return serviceRepository.save(service);
     }
 
     public UserDTO getUser(int userId) {
