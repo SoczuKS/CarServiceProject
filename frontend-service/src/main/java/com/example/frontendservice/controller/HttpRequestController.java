@@ -1,8 +1,12 @@
 package com.example.frontendservice.controller;
 
+import com.dto.ItemDTO;
 import com.dto.Role;
+import com.dto.ServiceDTO;
 import com.dto.UserDTO;
-import com.example.frontendservice.UserServiceClient;
+import com.example.frontendservice.service_client.InventoryServiceClient;
+import com.example.frontendservice.service_client.ServiceServiceClient;
+import com.example.frontendservice.service_client.UserServiceClient;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.core.Authentication;
@@ -18,16 +22,30 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class HttpRequestController {
     private final UserServiceClient userServiceClient;
+    private final ServiceServiceClient serviceServiceClient;
+    private final InventoryServiceClient inventoryServiceClient;
 
-    public HttpRequestController(UserServiceClient userServiceClient) {
+    public HttpRequestController(
+            UserServiceClient userServiceClient,
+            ServiceServiceClient serviceServiceClient,
+            InventoryServiceClient inventoryServiceClient) {
         this.userServiceClient = userServiceClient;
+        this.serviceServiceClient = serviceServiceClient;
+        this.inventoryServiceClient = inventoryServiceClient;
     }
 
     @GetMapping("/")
     public String index(Model model) {
+        model.addAttribute("roles", Role.values());
         model.addAttribute("users", userServiceClient.getUsers());
         model.addAttribute("newUser", new UserDTO());
-        model.addAttribute("roles", Role.values());
+
+        model.addAttribute("services", serviceServiceClient.getServices());
+        model.addAttribute("newService", new ServiceDTO());
+
+        model.addAttribute("items", inventoryServiceClient.getItems());
+        model.addAttribute("newItem", new ItemDTO());
+
         return "index";
     }
 
@@ -50,6 +68,18 @@ public class HttpRequestController {
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         user.setActive(true);
         userServiceClient.addUser(user);
+        return "redirect:/";
+    }
+
+    @PostMapping("/add_service")
+    public String addService(@ModelAttribute ServiceDTO service) {
+        serviceServiceClient.addService(service);
+        return "redirect:/";
+    }
+
+    @PostMapping("/add_item")
+    public String addItem(@ModelAttribute ItemDTO item) {
+        inventoryServiceClient.addItem(item);
         return "redirect:/";
     }
 }

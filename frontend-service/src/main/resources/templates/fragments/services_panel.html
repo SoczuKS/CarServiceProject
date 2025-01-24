@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="pl">
+<head>
+    <title>Service panel</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+<h3>Services</h3>
+<div class="horizontal_panel">
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Phone</th>
+            <th>Description</th>
+            <th>Employees</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="service : ${services}">
+            <td th:text="${service.name}"></td>
+            <td th:text="${service.address}"></td>
+            <td th:text="${service.phone}"></td>
+            <td th:text="${service.description}"></td>
+            <td>
+                <ul>
+                    <li th:each="employee : ${service.employees}">
+                        <span th:text="${employee.role} + ': '${employee.firstName} + ' ' + ${employee.lastName}"></span>
+                    </li>
+                </ul>
+            </td>
+        </tbody>
+    </table>
+    <div>
+        <h2>Add Service</h2>
+        <form th:action="@{/add_service}" th:object="${newService}" method="post">
+            <div>
+                <label for="name">Name:</label>
+                <input type="text" id="name" th:field="*{name}" required>
+            </div>
+            <div>
+                <label for="address">Address:</label>
+                <input type="text" id="address" th:field="*{address}" required>
+            </div>
+            <div>
+                <label for="phone">Phone:</label>
+                <input type="text" id="phone" th:field="*{phone}" required>
+            </div>
+            <div>
+                <label for="description">Description:</label>
+                <input type="text" id="description" th:field="*{description}" required>
+            </div>
+            <button type="submit">Add Service</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

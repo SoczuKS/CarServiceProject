@@ -2,74 +2,31 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="pl">
 <head>
     <title>CarService</title>
-    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css"/>
 </head>
 <body>
     <div class="tab">
-        <button class="tab_links" data-tab="employees" sec:authorize="hasRole('ADMIN') or hasRole('MANAGER')">Employees</button>
-        <button class="tab_links" data-tab="services" sec:authorize="hasRole('ADMIN') or hasRole('MANAGER')">Services</button>
-        <a href="/logout" class="tab_links">Logout</a>
+        <button class="tab_links" data-tab="employees"
+                sec:authorize="hasRole('ADMIN') or hasRole('MANAGER')">Employees</button>
+        <button class="tab_links" data-tab="services"
+                sec:authorize="hasRole('ADMIN') or hasRole('MANAGER')">Services</button>
+        <button class="tab_links" data-tab="inventory"
+                sec:authorize="hasRole('ADMIN') or hasRole('MANAGER') or hasRole('ACCOUNTANT')">Inventory</button>
+        <a href="/logout" class="tab_links logout_button">Logout</a>
     </div>
 
-    <div id="employees" class="tab_content" sec:authorize="hasRole('ADMIN') or hasRole('MANAGER')">
-        <h3>Employees</h3>
-        <div class="horizontal_panel">
-            <table>
-                <thead>
-                    <tr>
-                        <th>First name</th>
-                        <th>Last name</th>
-                        <th>E-Mail</th>
-                        <th>Role</th>
-                        <th>Active</th>
-                        <th>Creation date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:each="user : ${users}">
-                        <td th:text="${user.firstName}"></td>
-                        <td th:text="${user.lastName}"></td>
-                        <td th:text="${user.email}"></td>
-                        <td th:text="${user.role}"></td>
-                        <td th:text="${user.active}"></td>
-                        <td th:text="${user.createdAt}"></td>
-                    </tr>
-                </tbody>
-            </table>
-            <div>
-                <h2>Add User</h2>
-                <form th:action="@{/add_user}" th:object="${newUser}" method="post">
-                    <div>
-                        <label for="email">Email:</label>
-                        <input type="text" id="email" th:field="*{email}" required>
-                    </div>
-                    <div>
-                        <label for="password">Password:</label>
-                        <input type="password" id="password" th:field="*{password}" required>
-                    </div>
-                    <div>
-                        <label for="first_name">First name:</label>
-                        <input type="text" id="first_name" th:field="*{firstName}" required>
-                    </div>
-                    <div>
-                        <label for="last_name">Last name:</label>
-                        <input type="text" id="last_name" th:field="*{lastName}" required>
-                    </div>
-                    <div>
-                        <label for="role">Role:</label>
-                        <select id="role" th:field="*{role}" required>
-                            <option th:each="role : ${roles}" th:value="${role}" th:text="${role}"></option>
-                        </select>
-                    </div>
-                    <button type="submit">Add User</button>
-                </form>
-            </div>
-        </div>
-    </div>
+    <div id="employees" class="tab_content"
+         sec:authorize="hasRole('ADMIN') or hasRole('MANAGER')"
+         th:include="fragments/employees_panel :: body"></div>
 
-    <div id="services" class="tab_content" sec:authorize="hasRole('ADMIN') or hasRole('MANAGER')">
-        <h3>Services</h3>
-    </div>
+    <div id="services" class="tab_content"
+         sec:authorize="hasRole('ADMIN') or hasRole('MANAGER')"
+         th:include="fragments/services_panel :: body"></div>
+
+    <div id="inventory" class="tab_content"
+         sec:authorize="hasRole('ADMIN') or hasRole('MANAGER') or hasRole('ACCOUNTANT')"
+         th:include="fragments/inventory_panel :: body"></div>
 
     <script src="/js/scripts.js"></script>
 </body>

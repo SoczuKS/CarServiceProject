@@ -1,9 +1,11 @@
 package com.example.inventory_service;
 
 import com.example.inventory_service.entity.Item;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class ItemService {
     private final ItemRepository itemRepository;
 

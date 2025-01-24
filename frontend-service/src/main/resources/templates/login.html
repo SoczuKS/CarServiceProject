@@ -2,20 +2,21 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="pl">
 <head>
     <title>Login</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css"/>
 </head>
-<body>
-<h1>Login</h1>
-<form th:action="@{/login}" method="post">
+<body id="login_page">
+<form id="login_form" th:action="@{/login}" method="post">
     <div>
-        <label for="username">Email:</label>
+        <label for="username">E-mail:</label>
         <input type="email" id="username" name="username"/>
     </div>
     <div>
-        <label for="password">Password:</label>
+        <label for="password">Hasło:</label>
         <input type="password" id="password" name="password"/>
     </div>
     <div>
-        <button type="submit">Login</button>
+        <button type="submit">Zaloguj</button>
     </div>
 </form>
 </body>

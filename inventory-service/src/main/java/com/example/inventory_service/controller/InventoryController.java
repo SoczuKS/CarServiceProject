@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/inventory")
 public class InventoryController {
     private final ScheduleServiceClient scheduleServiceClient;
-    ItemService itemService;
+    private final ItemService itemService;
 
-    public InventoryController(ScheduleServiceClient scheduleServiceClient) {
+    public InventoryController(ScheduleServiceClient scheduleServiceClient, ItemService itemService) {
         this.scheduleServiceClient = scheduleServiceClient;
+        this.itemService = itemService;
     }
 
     @GetMapping("/check")

@@ -1,6 +1,7 @@
 package com.example.frontendservice;
 
 import com.dto.UserDTO;
+import com.example.frontendservice.service_client.UserServiceClient;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

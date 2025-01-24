@@ -1,4 +1,4 @@
-package com.example.frontendservice;
+package com.example.frontendservice.service_client;
 
 import com.dto.UserDTO;
 import org.springframework.cloud.openfeign.FeignClient;
