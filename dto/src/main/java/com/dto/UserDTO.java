@@ -13,6 +13,7 @@ public class UserDTO {
     private String firstName;
     private String lastName;
     private String password;
+    private String TIN;
     private Role role;
     private boolean active;
     private LocalDateTime createdAt;

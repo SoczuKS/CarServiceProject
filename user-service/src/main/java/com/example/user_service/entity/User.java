@@ -41,6 +41,8 @@ public class User {
     @Column(nullable = false)
     private LocalDateTime updatedAt;
 
+    private String TIN;
+
     @PrePersist
     protected void onCreate() {
         this.createdAt = LocalDateTime.now();

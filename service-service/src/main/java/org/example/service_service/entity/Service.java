@@ -14,12 +14,16 @@ public class Service {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String name;
 
+    @Column(nullable = false)
     private String address;
 
+    @Column(nullable = false)
     private String phone;
 
+    @Column(nullable = false)
     private String description;
 
     @ElementCollection
