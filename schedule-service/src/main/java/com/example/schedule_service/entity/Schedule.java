@@ -17,7 +17,7 @@ public class Schedule {
     private int id;
 
     @Column(nullable = false)
-    private String title;
+    private String name;
 
     @Column(nullable = false)
     private LocalDateTime startTime;

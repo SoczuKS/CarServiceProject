@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 public class ServiceWorkDTO {
     private int id;
+    private String name;
     private String description;
     private Double cost;
     private LocalDateTime workDate;
