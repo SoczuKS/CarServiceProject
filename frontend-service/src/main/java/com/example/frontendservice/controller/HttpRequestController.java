@@ -54,6 +54,28 @@ public class HttpRequestController {
         return "login";
     }
 
+    @GetMapping("/register")
+    public String register(Model model) {
+        model.addAttribute("newUser", new UserDTO());
+        return "register";
+    }
+
+    @PostMapping("/register")
+    public String register(@ModelAttribute UserDTO user) {
+        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+        user.setRole(Role.CLIENT);
+        if (user.getTIN().isEmpty()) {
+            user.setFirstName(user.getFirstName().substring(0, user.getFirstName().length() - 1));
+            user.setTIN(null);
+        }
+        if (user.getLastName().isEmpty()) {
+            user.setFirstName(user.getFirstName().substring(1));
+            user.setLastName(null);
+        }
+        userServiceClient.addUser(user);
+        return "redirect:/";
+    }
+
     @GetMapping("/logout")
     public String logout(HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

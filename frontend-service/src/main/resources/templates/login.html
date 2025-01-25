@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="pl">
 <head>
-    <title>Login</title>
+    <title>Logowanie</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="/css/styles.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/login_register.css"/>
 </head>
 <body id="login_page">
 <form id="login_form" th:action="@{/login}" method="post">
@@ -17,6 +17,9 @@
     </div>
     <div>
         <button type="submit">Zaloguj</button>
+    </div>
+    <div>
+        <a href="/register">Zarejestruj</a>
     </div>
 </form>
 </body>

@@ -1,10 +1,8 @@
 function onLoad() {
-    document.addEventListener('DOMContentLoaded', function() {
-        let tabLinks = document.querySelectorAll('.tab_links');
-        tabLinks.forEach(function(link) {
-            link.addEventListener('click', function(event) {
-                openTab(event, link.getAttribute('data-tab'));
-            });
+    let tabLinks = document.querySelectorAll('.tab_links');
+    tabLinks.forEach(function(link) {
+        link.addEventListener('click', function(event) {
+            openTab(event, link.getAttribute('data-tab'));
         });
     });
 }
@@ -23,5 +21,3 @@ function openTab(event, tabName) {
     document.getElementById(tabName).style.display = "block";
     event.currentTarget.className += " active";
 }
-
-onLoad();

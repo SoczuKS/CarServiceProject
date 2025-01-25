@@ -4,16 +4,17 @@
     <title>CarService</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="/css/styles.css"/>
+    <script src="/js/scripts.js"></script>
 </head>
-<body>
+<body onload="onLoad()">
     <div class="tab">
         <button class="tab_links" data-tab="employees"
-                sec:authorize="hasRole('ADMIN') or hasRole('MANAGER')">Employees</button>
+                sec:authorize="hasRole('ADMIN') or hasRole('MANAGER')">Pracownicy</button>
         <button class="tab_links" data-tab="services"
-                sec:authorize="hasRole('ADMIN') or hasRole('MANAGER')">Services</button>
+                sec:authorize="hasRole('ADMIN') or hasRole('MANAGER')">Serwisy</button>
         <button class="tab_links" data-tab="inventory"
-                sec:authorize="hasRole('ADMIN') or hasRole('MANAGER') or hasRole('ACCOUNTANT')">Inventory</button>
-        <a href="/logout" class="tab_links logout_button">Logout</a>
+                sec:authorize="hasRole('ADMIN') or hasRole('MANAGER') or hasRole('ACCOUNTANT')">Magazyn</button>
+        <a href="/logout" class="tab_links logout_button">Wyloguj</a>
     </div>
 
     <div id="employees" class="tab_content"
@@ -27,7 +28,5 @@
     <div id="inventory" class="tab_content"
          sec:authorize="hasRole('ADMIN') or hasRole('MANAGER') or hasRole('ACCOUNTANT')"
          th:include="fragments/inventory_panel :: body"></div>
-
-    <script src="/js/scripts.js"></script>
 </body>
 </html>
