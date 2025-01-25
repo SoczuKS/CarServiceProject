@@ -5,16 +5,16 @@
     <meta charset="UTF-8">
 </head>
 <body>
-<h3>Services</h3>
+<h3>Serwisy</h3>
 <div class="horizontal_panel">
     <table>
         <thead>
         <tr>
-            <th>Name</th>
-            <th>Address</th>
-            <th>Phone</th>
-            <th>Description</th>
-            <th>Employees</th>
+            <th>Nazwa</th>
+            <th>Adres</th>
+            <th>Telefon</th>
+            <th>Opis</th>
+            <th>Pracownicy</th>
         </tr>
         </thead>
         <tbody>
@@ -32,26 +32,26 @@
             </td>
         </tbody>
     </table>
-    <div>
-        <h2>Add Service</h2>
+    <div class="label_div">
+        <h2>Dodaj serwis</h2>
         <form th:action="@{/add_service}" th:object="${newService}" method="post">
             <div>
-                <label for="name">Name:</label>
+                <label for="name">Nazwa:</label>
                 <input type="text" id="name" th:field="*{name}" required>
             </div>
             <div>
-                <label for="address">Address:</label>
+                <label for="address">Adres:</label>
                 <input type="text" id="address" th:field="*{address}" required>
             </div>
             <div>
-                <label for="phone">Phone:</label>
+                <label for="phone">Numer telefonu:</label>
                 <input type="text" id="phone" th:field="*{phone}" required>
             </div>
             <div>
-                <label for="description">Description:</label>
+                <label for="description">Opis:</label>
                 <input type="text" id="description" th:field="*{description}" required>
             </div>
-            <button type="submit">Add Service</button>
+            <button type="submit">Dodaj serwis</button>
         </form>
     </div>
 </div>
