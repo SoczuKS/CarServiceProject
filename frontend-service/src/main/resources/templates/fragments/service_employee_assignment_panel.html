@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="pl">
+<head>
+    <title>Service details panel</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+<h3>Przypisanie pracownika do serwisu</h3>
+<div class="horizontal_panel">
+    <h4>Dostępne Serwisy</h4>
+    <table>
+        <thead>
+        <tr>
+            <th>Nazwa Serwisu</th>
+            <th>Opis</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="service : ${services}">
+            <td th:text="${service.name}"></td>
+            <td th:text="${service.description}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h4>Dostępni Użytkownicy</h4>
+    <table>
+        <thead>
+        <tr>
+            <th>Imię</th>
+            <th>Nazwisko</th>
+            <th>E-Mail</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.firstName}"></td>
+            <td th:text="${user.lastName}"></td>
+            <td th:text="${user.email}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h4>Przypisz użytkownika do serwisu</h4>
+    <form th:action="@{/assign_user_to_service}" method="post">
+        <div>
+            <label for="user">Użytkownik:</label>
+            <select id="user" name="userId" required>
+                <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.firstName} + ' ' + ${user.lastName}"></option>
+            </select>
+        </div>
+        <div>
+            <label for="service">Serwis:</label>
+            <select id="service" name="serviceId" required>
+                <option th:each="service : ${services}" th:value="${service.id}" th:text="${service.name}"></option>
+            </select>
+        </div>
+        <button type="submit">Przypisz</button>
+    </form>
+</div>
+</body>
+</html>

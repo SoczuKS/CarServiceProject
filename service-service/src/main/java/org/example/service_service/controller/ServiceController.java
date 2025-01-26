@@ -33,4 +33,9 @@ public class ServiceController {
     public Service addService(@RequestBody Service service) {
         return serviceService.addService(service);
     }
+
+    @PostMapping("/assign_user")
+    public void assignUserToService(@RequestParam int userId, @RequestParam int serviceId) {
+        serviceService.assignUserToService(userId, serviceId);
+    }
 }

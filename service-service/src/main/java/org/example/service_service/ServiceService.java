@@ -50,4 +50,15 @@ public class ServiceService {
     private Service fetchServiceFromDatabase(int serviceId) {
         return serviceRepository.findById(serviceId).orElseThrow(() -> new RuntimeException("Service not found"));
     }
+
+    public void assignUserToService(int userId, int serviceId) {
+        Service service = serviceRepository.findById(serviceId)
+                .orElseThrow(() -> new RuntimeException("Service not found"));
+        UserDTO user = userClient.getUserById(userId);
+        if (user == null) {
+            throw new RuntimeException("User not found");
+        }
+        service.getUserIDs().add(userId);
+        serviceRepository.save(service);
+    }
 }
