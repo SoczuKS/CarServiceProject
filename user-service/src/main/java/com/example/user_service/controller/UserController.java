@@ -30,4 +30,14 @@ public class UserController {
     public User addUser(@RequestBody User user) {
         return userService.addUser(user);
     }
+
+    @GetMapping("/employees")
+    public List<User> getEmployees() {
+        return userService.getEmployees();
+    }
+
+    @GetMapping("/clients")
+    public List<User> getClients() {
+        return userService.getClients();
+    }
 }

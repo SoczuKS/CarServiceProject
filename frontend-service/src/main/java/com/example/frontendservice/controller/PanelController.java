@@ -7,25 +7,22 @@ import com.dto.UserDTO;
 import com.example.frontendservice.service_client.InventoryServiceClient;
 import com.example.frontendservice.service_client.ServiceServiceClient;
 import com.example.frontendservice.service_client.UserServiceClient;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
+
 @Controller
-public class HttpRequestController {
+public class PanelController {
     private final UserServiceClient userServiceClient;
     private final ServiceServiceClient serviceServiceClient;
     private final InventoryServiceClient inventoryServiceClient;
 
-    public HttpRequestController(
+    public PanelController(
             UserServiceClient userServiceClient,
             ServiceServiceClient serviceServiceClient,
             InventoryServiceClient inventoryServiceClient) {
@@ -37,8 +34,8 @@ public class HttpRequestController {
     @GetMapping("/")
     public String index(Model model) {
         model.addAttribute("roles", Role.values());
-        model.addAttribute("users", userServiceClient.getUsers());
-        model.addAttribute("newUser", new UserDTO());
+        model.addAttribute("employees", userServiceClient.getEmployees());
+        model.addAttribute("newEmployee", new UserDTO());
 
         model.addAttribute("services", serviceServiceClient.getServices());
         model.addAttribute("newService", new ServiceDTO());
@@ -46,50 +43,20 @@ public class HttpRequestController {
         model.addAttribute("items", inventoryServiceClient.getItems());
         model.addAttribute("newItem", new ItemDTO());
 
+        List<UserDTO> clients = userServiceClient.getClients();
+        model.addAttribute("individualClients", clients.stream().filter(c -> c.getTIN() == null).toList());
+        model.addAttribute("newIndividualClient", new UserDTO());
+        model.addAttribute("companyClients", clients.stream().filter(c -> c.getTIN() != null).toList());
+        model.addAttribute("newCompanyClient", new UserDTO());
+
         return "index";
     }
 
-    @GetMapping("/login")
-    public String login() {
-        return "login";
-    }
-
-    @GetMapping("/register")
-    public String register(Model model) {
-        model.addAttribute("newUser", new UserDTO());
-        return "register";
-    }
-
-    @PostMapping("/register")
-    public String register(@ModelAttribute UserDTO user) {
-        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
-        user.setRole(Role.CLIENT);
-        if (user.getTIN().isEmpty()) {
-            user.setFirstName(user.getFirstName().substring(0, user.getFirstName().length() - 1));
-            user.setTIN(null);
-        }
-        if (user.getLastName().isEmpty()) {
-            user.setFirstName(user.getFirstName().substring(1));
-            user.setLastName(null);
-        }
-        userServiceClient.addUser(user);
-        return "redirect:/";
-    }
-
-    @GetMapping("/logout")
-    public String logout(HttpServletRequest request, HttpServletResponse response) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null) {
-            new SecurityContextLogoutHandler().logout(request, response, auth);
-        }
-        return "redirect:/";
-    }
-
-    @PostMapping("/add_user")
-    public String addUser(@ModelAttribute UserDTO user) {
-        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
-        user.setActive(true);
-        userServiceClient.addUser(user);
+    @PostMapping("/add_employee")
+    public String addUser(@ModelAttribute UserDTO employee) {
+        employee.setPassword(new BCryptPasswordEncoder().encode(employee.getPassword()));
+        employee.setActive(true);
+        userServiceClient.addUser(employee);
         return "redirect:/";
     }
 
@@ -102,6 +69,24 @@ public class HttpRequestController {
     @PostMapping("/add_item")
     public String addItem(@ModelAttribute ItemDTO item) {
         inventoryServiceClient.addItem(item);
+        return "redirect:/";
+    }
+
+    @PostMapping("/add_individual_client")
+    public String addIndividualClient(@ModelAttribute UserDTO client) {
+        client.setPassword(new BCryptPasswordEncoder().encode(client.getPassword()));
+        client.setRole(Role.CLIENT);
+        client.setActive(true);
+        userServiceClient.addUser(client);
+        return "redirect:/";
+    }
+
+    @PostMapping("/add_company_client")
+    public String addCompanyClient(@ModelAttribute UserDTO client) {
+        client.setPassword(new BCryptPasswordEncoder().encode(client.getPassword()));
+        client.setRole(Role.CLIENT);
+        client.setActive(true);
+        userServiceClient.addUser(client);
         return "redirect:/";
     }
 }

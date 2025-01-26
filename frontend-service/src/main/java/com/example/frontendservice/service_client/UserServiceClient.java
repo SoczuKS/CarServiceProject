@@ -17,6 +17,12 @@ public interface UserServiceClient {
     @GetMapping("/users")
     List<UserDTO> getUsers();
 
+    @GetMapping("/employees")
+    List<UserDTO> getEmployees();
+
+    @GetMapping("/clients")
+    List<UserDTO> getClients();
+
     @PostMapping("/users")
     UserDTO addUser(@RequestBody UserDTO user);
 }

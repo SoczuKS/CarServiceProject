@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <title>Rejestracja</title>
     <link rel="stylesheet" type="text/css" href="/css/login_register.css"/>
-    <script src="/js/register.js"></script>
+    <script src="/js/scripts.js"></script>
 </head>
-<body onload="onLoad()">
+<body onload="toggleClientData()">
 <form th:action="@{/register}" th:object="${newUser}" method="post">
     <div>
         <label for="username">E-mail:</label>
@@ -44,7 +44,12 @@
             <input type="text" id="tin" name="tin" minlength="10" maxlength="10" th:field="*{TIN}">
         </div>
     </div>
-    <button type="submit">Zarejestruj</button>
+    <div>
+        <button type="submit">Zarejestruj</button>
+    </div>
+    <div>
+        <a href="/">Wróć</a>
+    </div>
 </form>
 </body>
 </html>

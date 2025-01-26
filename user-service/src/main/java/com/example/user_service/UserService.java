@@ -1,5 +1,6 @@
 package com.example.user_service;
 
+import com.example.user_service.entity.Role;
 import com.example.user_service.entity.User;
 import org.springframework.stereotype.Service;
 
@@ -23,5 +24,13 @@ public class UserService {
 
     public User addUser(User user) {
         return userRepository.save(user);
+    }
+
+    public List<User> getEmployees() {
+        return userRepository.findOthersThanRole(Role.CLIENT);
+    }
+
+    public List<User> getClients() {
+        return userRepository.findByRole(Role.CLIENT);
     }
 }

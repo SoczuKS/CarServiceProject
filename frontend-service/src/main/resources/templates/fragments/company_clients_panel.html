@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Klienci biznesowi</title>
+</head>
+<body>
+<h3>Klienci biznesowi</h3>
+<div class="horizontal_panel">
+    <table>
+        <thead>
+        <tr>
+            <th>Nazwa</th>
+            <th>NIP</th>
+            <th>E-Mail</th>
+            <th>Konto aktywne</th>
+            <th>Data utworzenia</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="client : ${companyClients}">
+            <td th:text="${client.firstName}"></td>
+            <td th:text="${client.TIN}"></td>
+            <td th:text="${client.email}"></td>
+            <td th:text="${client.active}"></td>
+            <td th:text="${client.createdAt}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <div>
+        <h2>Dodaj klienta</h2>
+        <form th:action="@{/add_company_client}" th:object="${newCompanyClient}" method="post">
+            <div>
+                <label for="username">E-mail:</label>
+                <input type="email" id="username" name="username" required th:field="*{email}">
+            </div>
+            <div>
+                <label for="password">Hasło:</label>
+                <input type="password" id="password" name="password" required th:field="*{password}">
+            </div>
+            <div>
+                <label for="name">Nazwa</label>
+                <input type="text" id="name" name="name" th:field="*{firstName}">
+            </div>
+            <div>
+                <label for="tin">NIP:</label>
+                <input type="text" id="tin" name="tin" minlength="10" maxlength="10" th:field="*{TIN}">
+            </div>
+            <button type="submit">Dodaj klienta</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

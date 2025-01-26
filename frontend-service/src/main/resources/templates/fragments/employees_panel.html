@@ -19,19 +19,19 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="user : ${users}">
-            <td th:text="${user.firstName}"></td>
-            <td th:text="${user.lastName}"></td>
-            <td th:text="${user.email}"></td>
-            <td th:text="${user.role}"></td>
-            <td th:text="${user.active}"></td>
-            <td th:text="${user.createdAt}"></td>
+        <tr th:each="employee : ${employees}">
+            <td th:text="${employee.firstName}"></td>
+            <td th:text="${employee.lastName}"></td>
+            <td th:text="${employee.email}"></td>
+            <td th:text="${employee.role}"></td>
+            <td th:text="${employee.active}"></td>
+            <td th:text="${employee.createdAt}"></td>
         </tr>
         </tbody>
     </table>
     <div class="label_div">
-        <h2>Dodaj użytkownika</h2>
-        <form th:action="@{/add_user}" th:object="${newUser}" method="post">
+        <h2>Dodaj pracownika</h2>
+        <form th:action="@{/add_employee}" th:object="${newEmployee}" method="post">
             <div>
                 <label for="email">Email:</label>
                 <input type="text" id="email" th:field="*{email}" required>
