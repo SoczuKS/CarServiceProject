@@ -18,6 +18,8 @@
                 sec:authorize="hasRole('ADMIN') or hasRole('MANAGER') or hasRole('ACCOUNTANT') or hasRole('MECHANIC')">Klienci indywidualni</button>
         <button class="tab_links" data-tab="company_clients"
                 sec:authorize="hasRole('ADMIN') or hasRole('MANAGER') or hasRole('ACCOUNTANT') or hasRole('MECHANIC')">Klienci biznesowi</button>
+        <button class="tab_links" data-tab="cars"
+                sec:authorize="hasRole('CLIENT')">Flota</button>
         <a href="/logout" class="tab_links logout_button">Wyloguj</a>
     </div>
 
@@ -35,10 +37,14 @@
 
     <div id="individual_clients" class="tab_content"
          sec:authorize="hasRole('ADMIN') or hasRole('MANAGER') or hasRole('ACCOUNTANT') or hasRole('MECHANIC')"
-            th:insert="fragments/individual_clients_panel :: body"></div>
+         th:insert="fragments/individual_clients_panel :: body"></div>
 
     <div id="company_clients" class="tab_content"
          sec:authorize="hasRole('ADMIN') or hasRole('MANAGER') or hasRole('ACCOUNTANT') or hasRole('MECHANIC')"
          th:insert="fragments/company_clients_panel :: body"></div>
+
+    <div id="cars" class="tab_content"
+         sec:authorize="hasRole('CLIENT')"
+         th:insert="fragments/cars_panel :: body"></div>
 </body>
 </html>

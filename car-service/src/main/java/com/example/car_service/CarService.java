@@ -36,4 +36,8 @@ public class CarService {
     public UserDTO getOwner(int ownerId) {
         return userClient.getUserById(ownerId);
     }
+
+    public List<Car> getUserCars(int userId) {
+        return carRepository.findByOwnerId(userId);
+    }
 }

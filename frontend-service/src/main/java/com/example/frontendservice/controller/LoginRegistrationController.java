@@ -2,10 +2,11 @@ package com.example.frontendservice.controller;
 
 import com.dto.Role;
 import com.dto.UserDTO;
-import com.example.frontendservice.Helpers;
+import com.example.frontendservice.CustomUserDetails;
 import com.example.frontendservice.service_client.UserServiceClient;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -39,7 +40,14 @@ public class LoginRegistrationController {
     public String register(@ModelAttribute UserDTO user) {
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         user.setRole(Role.CLIENT);
-        Helpers.adjustNewClientData(user);
+        if (user.getTIN().isEmpty()) {
+            user.setFirstName(user.getFirstName().substring(0, user.getFirstName().length() - 1));
+            user.setTIN(null);
+        }
+        if (user.getLastName().isEmpty()) {
+            user.setFirstName(user.getFirstName().substring(1));
+            user.setLastName(null);
+        }
         userServiceClient.addUser(user);
         return "redirect:/";
     }
@@ -49,6 +57,16 @@ public class LoginRegistrationController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null) {
             new SecurityContextLogoutHandler().logout(request, response, auth);
+        }
+        return "redirect:/";
+    }
+
+    @GetMapping("/storeUser")
+    public String storeUser(HttpSession session) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.getPrincipal() instanceof CustomUserDetails userDetails) {
+            session.setAttribute("userId", userDetails.getId());
+            session.setAttribute("user", userDetails.getUser());
         }
         return "redirect:/";
     }

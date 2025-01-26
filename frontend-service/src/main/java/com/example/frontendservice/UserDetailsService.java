@@ -25,12 +25,6 @@ public class UserDetailsService implements org.springframework.security.core.use
         if (user == null) {
             throw new UsernameNotFoundException("user not found");
         }
-        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), getAuthorities(user));
-    }
-
-    private List<GrantedAuthority> getAuthorities(UserDTO user) {
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority("ROLE_" + user.getRole().name()));
-        return authorities;
+        return new CustomUserDetails(user);
     }
 }

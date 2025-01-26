@@ -1,6 +1,5 @@
 package com.example.car_service.entity;
 
-import com.dto.UserDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,8 +16,7 @@ public class Car {
 
     private String model;
 
-    @Transient
-    private UserDTO owner;
+    private int ownerId;
 
     private int year;
 }

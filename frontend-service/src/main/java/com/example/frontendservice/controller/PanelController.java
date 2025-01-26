@@ -1,12 +1,11 @@
 package com.example.frontendservice.controller;
 
-import com.dto.ItemDTO;
-import com.dto.Role;
-import com.dto.ServiceDTO;
-import com.dto.UserDTO;
+import com.dto.*;
+import com.example.frontendservice.service_client.CarServiceClient;
 import com.example.frontendservice.service_client.InventoryServiceClient;
 import com.example.frontendservice.service_client.ServiceServiceClient;
 import com.example.frontendservice.service_client.UserServiceClient;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,18 +20,26 @@ public class PanelController {
     private final UserServiceClient userServiceClient;
     private final ServiceServiceClient serviceServiceClient;
     private final InventoryServiceClient inventoryServiceClient;
+    private final CarServiceClient carServiceClient;
+    private final HttpSession httpSession;
 
     public PanelController(
             UserServiceClient userServiceClient,
             ServiceServiceClient serviceServiceClient,
-            InventoryServiceClient inventoryServiceClient) {
+            InventoryServiceClient inventoryServiceClient,
+            CarServiceClient carServiceClient,
+            HttpSession httpSession) {
         this.userServiceClient = userServiceClient;
         this.serviceServiceClient = serviceServiceClient;
         this.inventoryServiceClient = inventoryServiceClient;
+        this.carServiceClient = carServiceClient;
+        this.httpSession = httpSession;
     }
 
     @GetMapping("/")
     public String index(Model model) {
+        Integer userId = (Integer) httpSession.getAttribute("userId");
+
         model.addAttribute("roles", Role.values());
         model.addAttribute("employees", userServiceClient.getEmployees());
         model.addAttribute("newEmployee", new UserDTO());
@@ -48,6 +55,9 @@ public class PanelController {
         model.addAttribute("newIndividualClient", new UserDTO());
         model.addAttribute("companyClients", clients.stream().filter(c -> c.getTIN() != null).toList());
         model.addAttribute("newCompanyClient", new UserDTO());
+
+        model.addAttribute("cars", carServiceClient.getCars(userId));
+        model.addAttribute("newCar", new CarDTO());
 
         return "index";
     }
@@ -87,6 +97,14 @@ public class PanelController {
         client.setRole(Role.CLIENT);
         client.setActive(true);
         userServiceClient.addUser(client);
+        return "redirect:/";
+    }
+
+    @PostMapping("/add_car")
+    public String addCar(@ModelAttribute CarDTO car) {
+        System.out.println(httpSession.getAttribute("userId"));
+        car.setOwnerId((Integer) httpSession.getAttribute("userId"));
+        carServiceClient.addCar(car);
         return "redirect:/";
     }
 }

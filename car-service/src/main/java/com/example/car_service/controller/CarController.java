@@ -1,12 +1,10 @@
 package com.example.car_service.controller;
 
+import com.dto.CarDTO;
 import com.dto.UserDTO;
 import com.example.car_service.CarService;
 import com.example.car_service.entity.Car;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,12 +16,12 @@ public class CarController {
         this.carService = carService;
     }
 
-    @GetMapping("/get-car")
+    @GetMapping("/car")
     public Car getCar(@RequestParam int id) {
         return carService.getCarById(id);
     }
 
-    @GetMapping("/get-car-by-model")
+    @GetMapping("/car_by_model")
     public Car getCarByModel(@RequestParam String model) {
         return carService.getCarByModel(model);
     }
@@ -33,18 +31,18 @@ public class CarController {
         return carService.getCars();
     }
 
-    @PostMapping("/add-car")
-    public Car addCar(@RequestParam String brand, @RequestParam String model, @RequestParam UserDTO owner, @RequestParam int year) {
-        Car car = new Car();
-        car.setBrand(brand);
-        car.setModel(model);
-        car.setOwner(owner);
-        car.setYear(year);
+    @PostMapping("/cars")
+    public Car addCar(@RequestBody Car car) {
         return carService.addCar(car);
     }
 
-    @PostMapping("/get-owner")
+    @PostMapping("/get_owner")
     public UserDTO getOwner(@RequestParam int ownerId) {
         return carService.getOwner(ownerId);
+    }
+
+    @GetMapping("/user_cars")
+    public List<Car> getUserCars(@RequestParam int userId) {
+        return carService.getUserCars(userId);
     }
 }
