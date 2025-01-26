@@ -1,6 +1,6 @@
 package com.example.car_service.controller;
 
-import com.dto.UserDTO;
+import com.dto.User;
 import com.example.car_service.CarService;
 import com.example.car_service.entity.Car;
 import org.springframework.web.bind.annotation.*;
@@ -36,7 +36,7 @@ public class CarController {
     }
 
     @PostMapping("/get_owner")
-    public UserDTO getOwner(@RequestParam int ownerId) {
+    public User getOwner(@RequestParam int ownerId) {
         return carService.getOwner(ownerId);
     }
 

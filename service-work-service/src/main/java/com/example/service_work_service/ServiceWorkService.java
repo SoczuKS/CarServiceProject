@@ -1,6 +1,6 @@
 package com.example.service_work_service;
 
-import com.dto.ScheduleDTO;
+import com.dto.Schedule;
 import com.example.service_work_service.client.ScheduleClient;
 import com.example.service_work_service.entity.ServiceWork;
 import org.springframework.stereotype.Service;
@@ -29,14 +29,14 @@ public class ServiceWorkService {
         return serviceWorkRepository.findAll();
     }
 
-    public ScheduleDTO getSchedule(int scheduleId) {
+    public Schedule getSchedule(int scheduleId) {
         return scheduleClient.getScheduleById(scheduleId);
     }
 
     public ServiceWork getServiceWorkWithSchedule(int serviceWorkId) {
         ServiceWork serviceWork = fetchServiceWorkFromDatabase(serviceWorkId);
 
-        ScheduleDTO schedule = getSchedule(serviceWork.getScheduleId());
+        Schedule schedule = getSchedule(serviceWork.getScheduleId());
         serviceWork.setSchedule(schedule);
 
         return serviceWork;

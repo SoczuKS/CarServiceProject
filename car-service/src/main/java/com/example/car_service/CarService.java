@@ -1,6 +1,6 @@
 package com.example.car_service;
 
-import com.dto.UserDTO;
+import com.dto.User;
 import com.example.car_service.client.UserClient;
 import com.example.car_service.entity.Car;
 import org.springframework.stereotype.Service;
@@ -33,7 +33,7 @@ public class CarService {
         return carRepository.save(car);
     }
 
-    public UserDTO getOwner(int ownerId) {
+    public User getOwner(int ownerId) {
         return userClient.getUserById(ownerId);
     }
 

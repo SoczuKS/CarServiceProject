@@ -7,13 +7,12 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-public class ServiceWorkDTO {
+public class ServiceWork {
     private int id;
     private String name;
     private String description;
-    private Double cost;
+    private float cost;
     private LocalDateTime workDate;
     private WorkStatus status;
-    private int scheduleId;
-    private ScheduleDTO schedule;
+    private Schedule schedule;
 }

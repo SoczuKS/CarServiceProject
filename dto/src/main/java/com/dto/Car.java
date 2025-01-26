@@ -5,10 +5,10 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class CarDTO {
+public class Car {
     private int id;
     private String brand;
     private String model;
-    private int ownerId;
+    private User owner;
     private int year;
 }

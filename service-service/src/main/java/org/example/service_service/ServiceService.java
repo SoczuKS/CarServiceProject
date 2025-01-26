@@ -1,6 +1,6 @@
 package org.example.service_service;
 
-import com.dto.UserDTO;
+import com.dto.User;
 import org.example.service_service.client.UserClient;
 import org.example.service_service.entity.Service;
 
@@ -33,14 +33,14 @@ public class ServiceService {
         return serviceRepository.save(service);
     }
 
-    public UserDTO getUser(int userId) {
+    public User getUser(int userId) {
         return userClient.getUserById(userId);
     }
 
     public Service getServiceWithUser(int serviceId) {
         Service service = fetchServiceFromDatabase(serviceId);
         List<Integer> userIds = service.getEmployeesIDs();
-        List<UserDTO> users = userIds.stream()
+        List<User> users = userIds.stream()
                 .map(this::getUser)
                 .collect(Collectors.toList());
         service.setEmployees(users);

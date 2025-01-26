@@ -1,6 +1,6 @@
 package com.example.frontendservice.service_client;
 
-import com.dto.UserDTO;
+import com.dto.User;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,20 +12,20 @@ import java.util.List;
 @FeignClient(name = "user-service", url = "http://localhost:8763")
 public interface UserServiceClient {
     @GetMapping("/get_user")
-    UserDTO getUserByEmail(@RequestParam("email") String email);
+    User getUserByEmail(@RequestParam("email") String email);
 
     @GetMapping("/get_user_by_id")
-    UserDTO getUserById(@RequestParam("id") int id);
+    User getUserById(@RequestParam("id") int id);
 
     @GetMapping("/users")
-    List<UserDTO> getUsers();
+    List<User> getUsers();
 
     @GetMapping("/employees")
-    List<UserDTO> getEmployees();
+    List<User> getEmployees();
 
     @GetMapping("/clients")
-    List<UserDTO> getClients();
+    List<User> getClients();
 
     @PostMapping("/users")
-    UserDTO addUser(@RequestBody UserDTO user);
+    User addUser(@RequestBody User user);
 }

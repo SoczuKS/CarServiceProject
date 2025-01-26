@@ -22,7 +22,7 @@ public class ServiceWork {
     private String description;
 
     @Column(nullable = false)
-    private Double cost;
+    private float cost;
 
     @Column(nullable = false)
     private LocalDateTime workDate;

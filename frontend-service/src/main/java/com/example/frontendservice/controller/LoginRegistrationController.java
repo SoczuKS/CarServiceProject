@@ -1,7 +1,7 @@
 package com.example.frontendservice.controller;
 
 import com.dto.Role;
-import com.dto.UserDTO;
+import com.dto.User;
 import com.example.frontendservice.CustomUserDetails;
 import com.example.frontendservice.service_client.UserServiceClient;
 import jakarta.servlet.http.HttpServletRequest;
@@ -32,12 +32,12 @@ public class LoginRegistrationController {
 
     @GetMapping("/register")
     public String register(Model model) {
-        model.addAttribute("newUser", new UserDTO());
+        model.addAttribute("newUser", new User());
         return "register";
     }
 
     @PostMapping("/register")
-    public String register(@ModelAttribute UserDTO user) {
+    public String register(@ModelAttribute User user) {
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         user.setRole(Role.CLIENT);
         if (user.getTIN().isEmpty()) {

@@ -45,37 +45,37 @@ public class PanelController {
         model.addAttribute("roles", Role.values());
         model.addAttribute("employees", userServiceClient.getEmployees());
         model.addAttribute("employeesNoAdmin", userServiceClient.getEmployees().stream().filter(e -> e.getRole() != Role.ADMIN).toList());
-        model.addAttribute("newEmployee", new UserDTO());
+        model.addAttribute("newEmployee", new User());
 
-        List<ServiceDTO> services = serviceServiceClient.getServices();
-        for (ServiceDTO service : services) {
+        List<Service> services = serviceServiceClient.getServices();
+        for (Service service : services) {
             List<Integer> userIds = service.getEmployeesIDs();
-            List<UserDTO> users = userIds.stream()
+            List<User> users = userIds.stream()
                     .map(userServiceClient::getUserById)
                     .collect(Collectors.toList());
             service.setEmployees(users);
         }
 
         model.addAttribute("services", services);
-        model.addAttribute("newService", new ServiceDTO());
+        model.addAttribute("newService", new Service());
 
         model.addAttribute("items", inventoryServiceClient.getItems());
-        model.addAttribute("newItem", new ItemDTO());
+        model.addAttribute("newItem", new Item());
 
-        List<UserDTO> clients = userServiceClient.getClients();
+        List<User> clients = userServiceClient.getClients();
         model.addAttribute("individualClients", clients.stream().filter(c -> c.getTIN() == null).toList());
-        model.addAttribute("newIndividualClient", new UserDTO());
+        model.addAttribute("newIndividualClient", new User());
         model.addAttribute("companyClients", clients.stream().filter(c -> c.getTIN() != null).toList());
-        model.addAttribute("newCompanyClient", new UserDTO());
+        model.addAttribute("newCompanyClient", new User());
 
         model.addAttribute("cars", carServiceClient.getCars(userId));
-        model.addAttribute("newCar", new CarDTO());
+        model.addAttribute("newCar", new Car());
 
         return "index";
     }
 
     @PostMapping("/add_employee")
-    public String addUser(@ModelAttribute UserDTO employee) {
+    public String addUser(@ModelAttribute User employee) {
         employee.setPassword(new BCryptPasswordEncoder().encode(employee.getPassword()));
         employee.setActive(true);
         userServiceClient.addUser(employee);
@@ -83,19 +83,19 @@ public class PanelController {
     }
 
     @PostMapping("/add_service")
-    public String addService(@ModelAttribute ServiceDTO service) {
+    public String addService(@ModelAttribute Service service) {
         serviceServiceClient.addService(service);
         return "redirect:/";
     }
 
     @PostMapping("/add_item")
-    public String addItem(@ModelAttribute ItemDTO item) {
+    public String addItem(@ModelAttribute Item item) {
         inventoryServiceClient.addItem(item);
         return "redirect:/";
     }
 
     @PostMapping("/add_individual_client")
-    public String addIndividualClient(@ModelAttribute UserDTO client) {
+    public String addIndividualClient(@ModelAttribute User client) {
         client.setPassword(new BCryptPasswordEncoder().encode(client.getPassword()));
         client.setRole(Role.CLIENT);
         client.setActive(true);
@@ -104,7 +104,7 @@ public class PanelController {
     }
 
     @PostMapping("/add_company_client")
-    public String addCompanyClient(@ModelAttribute UserDTO client) {
+    public String addCompanyClient(@ModelAttribute User client) {
         client.setPassword(new BCryptPasswordEncoder().encode(client.getPassword()));
         client.setRole(Role.CLIENT);
         client.setActive(true);
@@ -113,7 +113,7 @@ public class PanelController {
     }
 
     @PostMapping("/add_car")
-    public String addCar(@ModelAttribute CarDTO car) {
+    public String addCar(@ModelAttribute Car car) {
         car.setOwnerId((Integer) httpSession.getAttribute("userId"));
         carServiceClient.addCar(car);
         return "redirect:/";
