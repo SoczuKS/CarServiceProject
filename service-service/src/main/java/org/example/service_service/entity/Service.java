@@ -27,8 +27,8 @@ public class Service {
     private String description;
 
     @ElementCollection
-    private List<Integer> userIDs;
+    private List<Integer> employeesIDs;
 
     @Transient
-    private List<UserDTO> users;
+    private List<UserDTO> employees;
 }

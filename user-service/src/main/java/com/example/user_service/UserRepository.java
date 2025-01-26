@@ -12,6 +12,7 @@ public interface UserRepository extends JpaRepository<User, String> {
     User findByEmail(String email);
     boolean existsByEmail(String email);
     List<User> findByRole(Role role);
+    User findById(int id);
 
     @Query("SELECT u FROM User u WHERE u.role <> :role")
     List<User> findOthersThanRole(@Param("role") Role role);

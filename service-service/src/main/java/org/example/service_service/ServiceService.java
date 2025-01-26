@@ -39,11 +39,11 @@ public class ServiceService {
 
     public Service getServiceWithUser(int serviceId) {
         Service service = fetchServiceFromDatabase(serviceId);
-        List<Integer> userIds = service.getUserIDs();
+        List<Integer> userIds = service.getEmployeesIDs();
         List<UserDTO> users = userIds.stream()
                 .map(this::getUser)
                 .collect(Collectors.toList());
-        service.setUsers(users);
+        service.setEmployees(users);
         return service;
     }
 
@@ -54,11 +54,7 @@ public class ServiceService {
     public void assignUserToService(int userId, int serviceId) {
         Service service = serviceRepository.findById(serviceId)
                 .orElseThrow(() -> new RuntimeException("Service not found"));
-        UserDTO user = userClient.getUserById(userId);
-        if (user == null) {
-            throw new RuntimeException("User not found");
-        }
-        service.getUserIDs().add(userId);
+        service.getEmployeesIDs().add(userId);
         serviceRepository.save(service);
     }
 }

@@ -13,6 +13,6 @@ public class ServiceDTO {
     private String address;
     private String phone;
     private String description;
-    private List<Integer> userIDs;
-    private List<UserDTO> users;
+    private List<Integer> employeesIDs;
+    private List<UserDTO> employees;
 }

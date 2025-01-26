@@ -12,8 +12,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class PanelController {
@@ -42,9 +44,19 @@ public class PanelController {
 
         model.addAttribute("roles", Role.values());
         model.addAttribute("employees", userServiceClient.getEmployees());
+        model.addAttribute("employeesNoAdmin", userServiceClient.getEmployees().stream().filter(e -> e.getRole() != Role.ADMIN).toList());
         model.addAttribute("newEmployee", new UserDTO());
 
-        model.addAttribute("services", serviceServiceClient.getServices());
+        List<ServiceDTO> services = serviceServiceClient.getServices();
+        for (ServiceDTO service : services) {
+            List<Integer> userIds = service.getEmployeesIDs();
+            List<UserDTO> users = userIds.stream()
+                    .map(userServiceClient::getUserById)
+                    .collect(Collectors.toList());
+            service.setEmployees(users);
+        }
+
+        model.addAttribute("services", services);
         model.addAttribute("newService", new ServiceDTO());
 
         model.addAttribute("items", inventoryServiceClient.getItems());
@@ -104,6 +116,12 @@ public class PanelController {
     public String addCar(@ModelAttribute CarDTO car) {
         car.setOwnerId((Integer) httpSession.getAttribute("userId"));
         carServiceClient.addCar(car);
+        return "redirect:/";
+    }
+
+    @PostMapping("/assign_user_to_service")
+    public String assignUserToService(@RequestParam int userId, @RequestParam int serviceId) {
+        serviceServiceClient.assignUserToService(userId, serviceId);
         return "redirect:/";
     }
 }

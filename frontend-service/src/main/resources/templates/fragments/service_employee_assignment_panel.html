@@ -33,10 +33,10 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="user : ${users}">
-            <td th:text="${user.firstName}"></td>
-            <td th:text="${user.lastName}"></td>
-            <td th:text="${user.email}"></td>
+        <tr th:each="employee : ${employeesNoAdmin}">
+            <td th:text="${employee.firstName}"></td>
+            <td th:text="${employee.lastName}"></td>
+            <td th:text="${employee.email}"></td>
         </tr>
         </tbody>
     </table>
@@ -46,7 +46,7 @@
         <div>
             <label for="user">Użytkownik:</label>
             <select id="user" name="userId" required>
-                <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.firstName} + ' ' + ${user.lastName}"></option>
+                <option th:each="employee : ${employeesNoAdmin}" th:value="${employee.id}" th:text="${employee.firstName} + ' ' + ${employee.lastName}"></option>
             </select>
         </div>
         <div>

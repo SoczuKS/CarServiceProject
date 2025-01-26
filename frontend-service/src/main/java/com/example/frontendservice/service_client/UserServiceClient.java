@@ -14,6 +14,9 @@ public interface UserServiceClient {
     @GetMapping("/get_user")
     UserDTO getUserByEmail(@RequestParam("email") String email);
 
+    @GetMapping("/get_user_by_id")
+    UserDTO getUserById(@RequestParam("id") int id);
+
     @GetMapping("/users")
     List<UserDTO> getUsers();
 

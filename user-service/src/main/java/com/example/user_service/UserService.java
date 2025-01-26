@@ -33,4 +33,8 @@ public class UserService {
     public List<User> getClients() {
         return userRepository.findByRole(Role.CLIENT);
     }
+
+    public User getUserById(int id) {
+        return userRepository.findById(id);
+    }
 }

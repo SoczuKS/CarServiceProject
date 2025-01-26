@@ -26,6 +26,11 @@ public class UserController {
         return userService.getUsers();
     }
 
+    @GetMapping("/get_user_by_id")
+    public User getUserById(@RequestParam int id) {
+        return userService.getUserById(id);
+    }
+
     @PostMapping("/users")
     public User addUser(@RequestBody User user) {
         return userService.addUser(user);

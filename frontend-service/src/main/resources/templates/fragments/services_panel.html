@@ -26,7 +26,7 @@
             <td>
                 <ul>
                     <li th:each="employee : ${service.employees}">
-                        <span th:text="${employee.role} + ': '${employee.firstName} + ' ' + ${employee.lastName}"></span>
+                        <span th:text="|${employee.role}: ${employee.firstName} ${employee.lastName}|"></span>
                     </li>
                 </ul>
             </td>
