@@ -102,7 +102,6 @@ public class PanelController {
 
     @PostMapping("/add_car")
     public String addCar(@ModelAttribute CarDTO car) {
-        System.out.println(httpSession.getAttribute("userId"));
         car.setOwnerId((Integer) httpSession.getAttribute("userId"));
         carServiceClient.addCar(car);
         return "redirect:/";
