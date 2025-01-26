@@ -1,7 +1,8 @@
-package com.example.user_service;
+package com.example.database_service;
 
-import com.example.user_service.entity.Role;
-import com.example.user_service.entity.User;
+import com.example.database_service.entity.Role;
+import com.example.database_service.entity.User;
+import com.example.database_service.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;

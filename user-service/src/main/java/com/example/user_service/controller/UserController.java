@@ -1,46 +1,31 @@
 package com.example.user_service.controller;
 
-import com.example.user_service.UserService;
-import com.example.user_service.entity.User;
+import com.dto.User;
+import com.example.user_service.service_client.DatabaseServiceClient;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 public class UserController {
-    private final UserService userService;
+    private final DatabaseServiceClient databaseServiceClient;
 
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
-
-    @GetMapping("/get_user")
-    public User getUserByEmail(@RequestParam String email) {
-        return userService.getUserByEmail(email);
+    public UserController(DatabaseServiceClient databaseServiceClient) {
+        this.databaseServiceClient = databaseServiceClient;
     }
 
     @GetMapping("/users")
     public List<User> getUsers() {
-        return userService.getUsers();
-    }
-
-    @GetMapping("/get_user_by_id")
-    public User getUserById(@RequestParam int id) {
-        return userService.getUserById(id);
+        return databaseServiceClient.getUsers();
     }
 
     @PostMapping("/users")
     public User addUser(@RequestBody User user) {
-        return userService.addUser(user);
+        return databaseServiceClient.addUser(user);
     }
 
-    @GetMapping("/employees")
-    public List<User> getEmployees() {
-        return userService.getEmployees();
-    }
-
-    @GetMapping("/clients")
-    public List<User> getClients() {
-        return userService.getClients();
+    @GetMapping("/get_user_by_email")
+    public User getUserByEmail(@RequestParam("email") String email) {
+        return databaseServiceClient.getUserByEmail(email);
     }
 }

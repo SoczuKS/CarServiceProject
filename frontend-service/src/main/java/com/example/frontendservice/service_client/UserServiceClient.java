@@ -11,20 +11,11 @@ import java.util.List;
 
 @FeignClient(name = "user-service", url = "http://localhost:8763")
 public interface UserServiceClient {
-    @GetMapping("/get_user")
+    @GetMapping("/get_user_by_email")
     User getUserByEmail(@RequestParam("email") String email);
-
-    @GetMapping("/get_user_by_id")
-    User getUserById(@RequestParam("id") int id);
 
     @GetMapping("/users")
     List<User> getUsers();
-
-    @GetMapping("/employees")
-    List<User> getEmployees();
-
-    @GetMapping("/clients")
-    List<User> getClients();
 
     @PostMapping("/users")
     User addUser(@RequestBody User user);
