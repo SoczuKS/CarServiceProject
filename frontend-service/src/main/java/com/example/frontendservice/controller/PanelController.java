@@ -40,7 +40,8 @@ public class PanelController {
 
     @GetMapping("/")
     public String index(Model model) {
-        Integer userId = (Integer) httpSession.getAttribute("userId");
+        /*
+        User userId = (User) httpSession.getAttribute("user");
 
         model.addAttribute("roles", Role.values());
         model.addAttribute("employees", userServiceClient.getEmployees());
@@ -70,7 +71,7 @@ public class PanelController {
 
         model.addAttribute("cars", carServiceClient.getCars(userId));
         model.addAttribute("newCar", new Car());
-
+*/
         return "index";
     }
 
@@ -114,7 +115,7 @@ public class PanelController {
 
     @PostMapping("/add_car")
     public String addCar(@ModelAttribute Car car) {
-        car.setOwnerId((Integer) httpSession.getAttribute("userId"));
+        car.setOwner((User) httpSession.getAttribute("user"));
         carServiceClient.addCar(car);
         return "redirect:/";
     }

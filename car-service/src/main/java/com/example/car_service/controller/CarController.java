@@ -1,47 +1,32 @@
 package com.example.car_service.controller;
 
+import com.dto.Car;
 import com.dto.User;
-import com.example.car_service.CarService;
-import com.example.car_service.entity.Car;
+import com.example.car_service.service_client.DatabaseServiceClient;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 public class CarController {
-    private final CarService carService;
+    private final DatabaseServiceClient databaseServiceClient;
 
-    public CarController(CarService carService) {
-        this.carService = carService;
-    }
-
-    @GetMapping("/car")
-    public Car getCar(@RequestParam int id) {
-        return carService.getCarById(id);
-    }
-
-    @GetMapping("/car_by_model")
-    public Car getCarByModel(@RequestParam String model) {
-        return carService.getCarByModel(model);
+    public CarController(DatabaseServiceClient databaseServiceClient) {
+        this.databaseServiceClient = databaseServiceClient;
     }
 
     @GetMapping("/cars")
     public List<Car> getCars() {
-        return carService.getCars();
+        return databaseServiceClient.getCars();
     }
 
     @PostMapping("/cars")
     public Car addCar(@RequestBody Car car) {
-        return carService.addCar(car);
+        return databaseServiceClient.addCar(car);
     }
 
-    @PostMapping("/get_owner")
-    public User getOwner(@RequestParam int ownerId) {
-        return carService.getOwner(ownerId);
-    }
-
-    @GetMapping("/user_cars")
-    public List<Car> getUserCars(@RequestParam int userId) {
-        return carService.getUserCars(userId);
+    @GetMapping("/get_cars_by_owner")
+    public List<Car> getCarsByOwner(@RequestParam User owner) {
+        return databaseServiceClient.getCarsByOwner(owner);
     }
 }

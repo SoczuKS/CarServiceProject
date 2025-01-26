@@ -12,7 +12,7 @@ import java.util.List;
 @FeignClient(name = "user-service", url = "http://localhost:8763")
 public interface UserServiceClient {
     @GetMapping("/get_user_by_email")
-    User getUserByEmail(@RequestParam("email") String email);
+    User getUserByEmail(@RequestParam String email);
 
     @GetMapping("/users")
     List<User> getUsers();
