@@ -1,7 +1,7 @@
-package com.example.user_service;
+package com.example.database_service.repository;
 
-import com.example.user_service.entity.Role;
-import com.example.user_service.entity.User;
+import com.example.database_service.entity.Role;
+import com.example.database_service.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

@@ -1,14 +1,14 @@
-package org.example.service_service.entity;
+package com.example.database_service.entity;
 
-import com.dto.UserDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
 @Entity
+@Table(name = "services")
 public class Service {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,9 +26,6 @@ public class Service {
     @Column(nullable = false)
     private String description;
 
-    @ElementCollection
-    private List<Integer> employeesIDs;
-
-    @Transient
-    private List<UserDTO> employees;
+    @OneToMany(mappedBy = "service")
+    private Set<User> employees;
 }

@@ -1,17 +1,17 @@
-package com.example.user_service.entity;
+package com.example.database_service.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Setter
 @Getter
 @Entity
 @Table(name = "users")
 public class User {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
@@ -41,6 +41,13 @@ public class User {
     private LocalDateTime updatedAt;
 
     private String TIN;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "owner")
+    private Set<Car> cars;
+
+    @JoinColumn
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Service service;
 
     @PrePersist
     protected void onCreate() {

@@ -1,6 +1,6 @@
-package com.example.schedule_service;
+package com.example.database_service.repository;
 
-import com.example.schedule_service.entity.Schedule;
+import com.example.database_service.entity.Schedule;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ScheduleRepository extends JpaRepository<Schedule, Integer> {

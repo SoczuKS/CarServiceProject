@@ -1,6 +1,5 @@
 package com.example.car_service.controller;
 
-import com.dto.CarDTO;
 import com.dto.UserDTO;
 import com.example.car_service.CarService;
 import com.example.car_service.entity.Car;

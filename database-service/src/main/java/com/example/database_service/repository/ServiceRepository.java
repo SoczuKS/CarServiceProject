@@ -1,6 +1,6 @@
-package org.example.service_service;
+package com.example.database_service.repository;
 
-import org.example.service_service.entity.Service;
+import com.example.database_service.entity.Service;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ServiceRepository extends JpaRepository<Service, Integer> {

@@ -1,4 +1,4 @@
-package com.example.schedule_service.entity;
+package com.example.database_service.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -11,7 +11,6 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "schedules")
 public class Schedule {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
@@ -29,8 +28,9 @@ public class Schedule {
     @Column(nullable = false)
     private ScheduleStatus status;
 
-    @Column(nullable = false)
-    private int userId;
+    @JoinColumn(nullable = false)
+    @ManyToOne
+    private User employee;
 
     @PrePersist
     protected void onCreate() {

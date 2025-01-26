@@ -1,6 +1,5 @@
-package com.example.service_work_service.entity;
+package com.example.database_service.entity;
 
-import com.dto.ScheduleDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,9 +9,8 @@ import java.time.LocalDateTime;
 @Setter
 @Getter
 @Entity
-@Table(name = "service_work")
+@Table(name = "service_works")
 public class ServiceWork {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
@@ -33,9 +31,7 @@ public class ServiceWork {
     @Column(nullable = false)
     private WorkStatus status;
 
-    @Column(name = "schedule_id", nullable = false)
-    private int scheduleId;
-
-    @Transient
-    private ScheduleDTO schedule;
+    @JoinColumn(nullable = false)
+    @ManyToOne
+    private Schedule schedule;
 }

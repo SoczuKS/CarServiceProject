@@ -1,4 +1,4 @@
-package com.example.service_work_service.entity;
+package com.example.database_service.entity;
 
 public enum WorkStatus {
     NOT_STARTED,

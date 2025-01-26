@@ -1,6 +1,6 @@
-package com.example.car_service;
+package com.example.database_service.repository;
 
-import com.example.car_service.entity.Car;
+import com.example.database_service.entity.Car;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.example.car_service.entity;
+package com.example.database_service.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -7,16 +7,22 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
+@Table(name = "cars")
 public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(nullable = false)
     private String brand;
 
+    @Column(nullable = false)
     private String model;
 
-    private int ownerId;
+    @JoinColumn(nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User owner;
 
+    @Column(nullable = false)
     private int year;
 }

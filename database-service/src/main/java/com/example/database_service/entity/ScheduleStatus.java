@@ -1,4 +1,4 @@
-package com.example.schedule_service.entity;
+package com.example.database_service.entity;
 
 public enum ScheduleStatus {
     PENDING,
