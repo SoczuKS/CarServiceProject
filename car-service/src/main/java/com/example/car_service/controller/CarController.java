@@ -25,8 +25,8 @@ public class CarController {
         return databaseServiceClient.addCar(car);
     }
 
-    @GetMapping("/get_cars_by_owner")
-    public List<Car> getCarsByOwner(@RequestParam("owner") User owner) {
+    @PostMapping("/get_cars_by_owner")
+    public List<Car> getCarsByOwner(@RequestBody User owner) {
         return databaseServiceClient.getCarsByOwner(owner);
     }
 }

@@ -38,7 +38,7 @@ public class PanelController {
 
     @GetMapping("/")
     public String index(Model model) {
-        User userId = (User) httpSession.getAttribute("user");
+        User user = (User) httpSession.getAttribute("user");
 
         List<User> allUsers = userServiceClient.getUsers();
         List<User> employees = allUsers.stream().filter(u -> u.getRole() != Role.CLIENT).toList();
@@ -61,7 +61,7 @@ public class PanelController {
         model.addAttribute("companyClients", clients.stream().filter(c -> c.getTIN() != null).toList());
         model.addAttribute("newCompanyClient", new User());
 
-        model.addAttribute("cars", carServiceClient.getCars(userId));
+        model.addAttribute("cars", carServiceClient.getCarsByOwner(user));
         model.addAttribute("newCar", new Car());
 
         return "index";

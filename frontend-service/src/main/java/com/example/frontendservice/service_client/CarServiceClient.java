@@ -12,9 +12,12 @@ import java.util.List;
 
 @FeignClient(name = "car-service")
 public interface CarServiceClient {
-    @GetMapping("/get_cars_by_owner")
-    List<Car> getCars(@RequestParam User user);
+    @GetMapping("/cars")
+    List<Car> getAllCars();
 
     @PostMapping("/cars")
     void addCar(@RequestBody Car car);
+
+    @PostMapping("/get_cars_by_owner")
+    List<Car> getCarsByOwner(@RequestBody User owner);
 }

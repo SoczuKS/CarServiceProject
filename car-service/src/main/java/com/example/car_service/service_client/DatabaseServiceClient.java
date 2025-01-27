@@ -18,6 +18,6 @@ public interface DatabaseServiceClient {
     @PostMapping("/cars")
     Car addCar(@RequestBody Car car);
 
-    @GetMapping("/get_cars_by_owner")
-    List<Car> getCarsByOwner(@RequestParam("owner") User owner);
+    @PostMapping("/get_cars_by_owner")
+    List<Car> getCarsByOwner(@RequestBody User owner);
 }

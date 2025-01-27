@@ -25,8 +25,8 @@ public class CarController {
         return carRepository.save(car);
     }
 
-    @GetMapping("/get_cars_by_owner")
-    public List<Car> getCarsByUser(@RequestParam("owner") User owner) {
+    @PostMapping("/get_cars_by_owner")
+    public List<Car> getCarsByUser(@RequestBody User owner) {
         return carRepository.findByOwner(owner);
     }
 }
