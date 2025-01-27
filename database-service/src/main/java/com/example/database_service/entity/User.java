@@ -47,7 +47,7 @@ public class User {
 
     @JoinColumn
     @ManyToOne(fetch = FetchType.LAZY)
-    private Service service;
+    private Workshop workshop;
 
     @PrePersist
     protected void onCreate() {

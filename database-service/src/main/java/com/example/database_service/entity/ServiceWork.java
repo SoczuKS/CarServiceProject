@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Setter
 @Getter
@@ -34,4 +35,13 @@ public class ServiceWork {
     @JoinColumn(nullable = false)
     @ManyToOne
     private Schedule schedule;
+
+    @ManyToOne
+    private Car car;
+
+    @ManyToOne
+    private User mechanic;
+
+    @ManyToMany
+    private Set<Item> parts;
 }

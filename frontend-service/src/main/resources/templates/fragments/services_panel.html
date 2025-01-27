@@ -18,14 +18,14 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="service : ${services}">
-            <td th:text="${service.name}"></td>
-            <td th:text="${service.address}"></td>
-            <td th:text="${service.phone}"></td>
-            <td th:text="${service.description}"></td>
+        <tr th:each="workshop : ${workshops}">
+            <td th:text="${workshop.name}"></td>
+            <td th:text="${workshop.address}"></td>
+            <td th:text="${workshop.phone}"></td>
+            <td th:text="${workshop.description}"></td>
             <td>
                 <ul>
-                    <li th:each="employee : ${service.employees}">
+                    <li th:each="employee : ${workshop.employees}">
                         <span th:text="|${employee.role}: ${employee.firstName} ${employee.lastName}|"></span>
                     </li>
                 </ul>
@@ -34,7 +34,7 @@
     </table>
     <div class="label_div">
         <h2>Dodaj serwis</h2>
-        <form th:action="@{/add_service}" th:object="${newService}" method="post">
+        <form th:action="@{/add_workshop}" th:object="${newWorkshop}" method="post">
             <div>
                 <label for="name">Nazwa:</label>
                 <input type="text" id="name" th:field="*{name}" required>

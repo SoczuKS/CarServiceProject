@@ -1,4 +1,4 @@
-package org.example.service_service;
+package org.example.workshop_service;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,8 +8,8 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @SpringBootApplication
 @EnableFeignClients
 @EnableDiscoveryClient
-public class ServiceServiceApplication {
+public class WorkshopServiceApplication {
     public static void main(String[] args) {
-        SpringApplication.run(ServiceServiceApplication.class, args);
+        SpringApplication.run(WorkshopServiceApplication.class, args);
     }
 }

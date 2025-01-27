@@ -9,25 +9,24 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "cars")
-public class Car {
+@Table(name = "workshops")
+public class Workshop {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Column(nullable = false)
-    private String brand;
+    private String name;
 
     @Column(nullable = false)
-    private String model;
-
-    @JoinColumn(nullable = false)
-    @ManyToOne(fetch = FetchType.LAZY)
-    private User owner;
+    private String address;
 
     @Column(nullable = false)
-    private int year;
+    private String phone;
 
-    @OneToMany(mappedBy = "car")
-    private Set<ServiceWork> serviceWorks;
+    @Column(nullable = false)
+    private String description;
+
+    @OneToMany(mappedBy = "workshop")
+    private Set<User> employees;
 }

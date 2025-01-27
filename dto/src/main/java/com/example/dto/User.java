@@ -20,5 +20,5 @@ public class User {
     private LocalDateTime updatedAt;
     private String TIN;
     private Set<Car> cars;
-    private Service service;
+    private Workshop workshop;
 }

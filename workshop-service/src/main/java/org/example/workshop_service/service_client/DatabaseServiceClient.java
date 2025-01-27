@@ -1,6 +1,6 @@
-package org.example.service_service.service_client;
+package org.example.workshop_service.service_client;
 
-import com.example.dto.Service;
+import com.example.dto.Workshop;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,9 +10,9 @@ import java.util.List;
 
 @FeignClient(name = "database-service")
 public interface DatabaseServiceClient {
-    @GetMapping("/services")
-    List<Service> getServices();
+    @GetMapping("/workshops")
+    List<Workshop> getWorkshops();
 
-    @PostMapping("/services")
-    Service addService(@RequestBody Service service);
+    @PostMapping("/workshops")
+    Workshop addWorkshops(@RequestBody Workshop workshop);
 }

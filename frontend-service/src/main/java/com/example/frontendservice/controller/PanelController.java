@@ -3,7 +3,7 @@ package com.example.frontendservice.controller;
 import com.example.dto.*;
 import com.example.frontendservice.service_client.CarServiceClient;
 import com.example.frontendservice.service_client.InventoryServiceClient;
-import com.example.frontendservice.service_client.ServiceServiceClient;
+import com.example.frontendservice.service_client.WorkshopServiceClient;
 import com.example.frontendservice.service_client.UserServiceClient;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -18,19 +18,19 @@ import java.util.List;
 @Controller
 public class PanelController {
     private final UserServiceClient userServiceClient;
-    private final ServiceServiceClient serviceServiceClient;
+    private final WorkshopServiceClient workshopServiceClient;
     private final InventoryServiceClient inventoryServiceClient;
     private final CarServiceClient carServiceClient;
     private final HttpSession httpSession;
 
     public PanelController(
             UserServiceClient userServiceClient,
-            ServiceServiceClient serviceServiceClient,
+            WorkshopServiceClient workshopServiceClient,
             InventoryServiceClient inventoryServiceClient,
             CarServiceClient carServiceClient,
             HttpSession httpSession) {
         this.userServiceClient = userServiceClient;
-        this.serviceServiceClient = serviceServiceClient;
+        this.workshopServiceClient = workshopServiceClient;
         this.inventoryServiceClient = inventoryServiceClient;
         this.carServiceClient = carServiceClient;
         this.httpSession = httpSession;
@@ -49,9 +49,9 @@ public class PanelController {
         model.addAttribute("employeesNoAdmin", employees.stream().filter(e -> e.getRole() != Role.ADMIN).toList());
         model.addAttribute("newEmployee", new User());
 
-        List<Service> services = serviceServiceClient.getServices();
-        model.addAttribute("services", services);
-        model.addAttribute("newService", new Service());
+        List<Workshop> workshops = workshopServiceClient.getWorkshops();
+        model.addAttribute("workshops", workshops);
+        model.addAttribute("newWorkshop", new Workshop());
 
         model.addAttribute("items", inventoryServiceClient.getItems());
         model.addAttribute("newItem", new Item());
@@ -75,9 +75,9 @@ public class PanelController {
         return "redirect:/";
     }
 
-    @PostMapping("/add_service")
-    public String addService(@ModelAttribute Service service) {
-        serviceServiceClient.addService(service);
+    @PostMapping("/add_workshop")
+    public String addWorkshops(@ModelAttribute Workshop workshop) {
+        workshopServiceClient.addService(workshop);
         return "redirect:/";
     }
 

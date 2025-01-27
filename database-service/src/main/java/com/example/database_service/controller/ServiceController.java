@@ -1,6 +1,6 @@
 package com.example.database_service.controller;
 
-import com.example.database_service.entity.Service;
+import com.example.database_service.entity.Workshop;
 import com.example.database_service.repository.ServiceRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,13 +17,13 @@ public class ServiceController {
         this.serviceRepository = serviceRepository;
     }
 
-    @GetMapping("/services")
-    public List<Service> getServices() {
+    @GetMapping("/workshops")
+    public List<Workshop> getServices() {
         return serviceRepository.findAll();
     }
 
-    @PostMapping("/services")
-    public Service addService(@RequestBody Service service) {
-        return serviceRepository.save(service);
+    @PostMapping("/workshops")
+    public Workshop addService(@RequestBody Workshop workshop) {
+        return serviceRepository.save(workshop);
     }
 }

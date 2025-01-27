@@ -16,9 +16,9 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="service : ${services}">
-            <td th:text="${service.name}"></td>
-            <td th:text="${service.description}"></td>
+        <tr th:each="workshop : ${workshops}">
+            <td th:text="${workshop.name}"></td>
+            <td th:text="${workshop.description}"></td>
         </tr>
         </tbody>
     </table>
@@ -50,9 +50,9 @@
             </select>
         </div>
         <div>
-            <label for="service">Serwis:</label>
-            <select id="service" name="serviceId" required>
-                <option th:each="service : ${services}" th:value="${service.id}" th:text="${service.name}"></option>
+            <label for="workshop">Serwis:</label>
+            <select id="workshop" name="serviceId" required>
+                <option th:each="workshop : ${workshops}" th:value="${workshop.id}" th:text="${workshop.name}"></option>
             </select>
         </div>
         <button type="submit">Przypisz</button>
