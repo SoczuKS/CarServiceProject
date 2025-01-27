@@ -1,40 +1,26 @@
 package com.example.inventory_service.controller;
 
-import com.example.inventory_service.ItemService;
-import com.example.inventory_service.ScheduleServiceClient;
-import com.example.inventory_service.entity.Item;
+import com.dto.Item;
+import com.example.inventory_service.client_service.DatabaseServiceClient;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 public class InventoryController {
-    private final ScheduleServiceClient scheduleServiceClient;
-    private final ItemService itemService;
+    DatabaseServiceClient databaseServiceClient;
 
-    public InventoryController(ScheduleServiceClient scheduleServiceClient, ItemService itemService) {
-        this.scheduleServiceClient = scheduleServiceClient;
-        this.itemService = itemService;
-    }
-
-    @GetMapping("/check")
-    public String checkInventory() {
-        String scheduleServiceResponse = scheduleServiceClient.getSchedule();
-        return "Inventory is available. Schedule Service Response: " + scheduleServiceResponse;
-    }
-
-    @GetMapping("/get-item")
-    public Item getItem(@RequestParam String name) {
-        return itemService.getItemByName(name);
+    public InventoryController(DatabaseServiceClient databaseServiceClient) {
+        this.databaseServiceClient = databaseServiceClient;
     }
 
     @GetMapping("/items")
     public List<Item> getItems() {
-        return itemService.getItems();
+        return databaseServiceClient.getItems();
     }
 
     @PostMapping("/items")
-    public Item addItem() {
-        return itemService.addItem(new Item());
+    public Item addItem(@RequestBody Item item) {
+        return databaseServiceClient.addItem(item);
     }
 }

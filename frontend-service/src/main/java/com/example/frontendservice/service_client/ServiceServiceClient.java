@@ -16,7 +16,4 @@ public interface ServiceServiceClient {
 
     @PostMapping("/services")
     Service addService(@RequestBody Service service);
-
-    @PostMapping("/assign_user_to_service")
-    void assignUserToService(@RequestParam int userId, @RequestParam int serviceId);
 }

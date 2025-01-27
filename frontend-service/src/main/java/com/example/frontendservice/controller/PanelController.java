@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 public class PanelController {
@@ -40,30 +39,24 @@ public class PanelController {
 
     @GetMapping("/")
     public String index(Model model) {
-        /*
         User userId = (User) httpSession.getAttribute("user");
 
+        List<User> allUsers = userServiceClient.getUsers();
+        List<User> employees = allUsers.stream().filter(u -> u.getRole() != Role.CLIENT).toList();
+        List<User> clients = allUsers.stream().filter(u -> u.getRole() == Role.CLIENT).toList();
+
         model.addAttribute("roles", Role.values());
-        model.addAttribute("employees", userServiceClient.getEmployees());
-        model.addAttribute("employeesNoAdmin", userServiceClient.getEmployees().stream().filter(e -> e.getRole() != Role.ADMIN).toList());
+        model.addAttribute("employees", employees);
+        model.addAttribute("employeesNoAdmin", employees.stream().filter(e -> e.getRole() != Role.ADMIN).toList());
         model.addAttribute("newEmployee", new User());
 
         List<Service> services = serviceServiceClient.getServices();
-        for (Service service : services) {
-            List<Integer> userIds = service.getEmployeesIDs();
-            List<User> users = userIds.stream()
-                    .map(userServiceClient::getUserById)
-                    .collect(Collectors.toList());
-            service.setEmployees(users);
-        }
-
         model.addAttribute("services", services);
         model.addAttribute("newService", new Service());
 
         model.addAttribute("items", inventoryServiceClient.getItems());
         model.addAttribute("newItem", new Item());
 
-        List<User> clients = userServiceClient.getClients();
         model.addAttribute("individualClients", clients.stream().filter(c -> c.getTIN() == null).toList());
         model.addAttribute("newIndividualClient", new User());
         model.addAttribute("companyClients", clients.stream().filter(c -> c.getTIN() != null).toList());
@@ -71,7 +64,7 @@ public class PanelController {
 
         model.addAttribute("cars", carServiceClient.getCars(userId));
         model.addAttribute("newCar", new Car());
-*/
+
         return "index";
     }
 
@@ -117,12 +110,6 @@ public class PanelController {
     public String addCar(@ModelAttribute Car car) {
         car.setOwner((User) httpSession.getAttribute("user"));
         carServiceClient.addCar(car);
-        return "redirect:/";
-    }
-
-    @PostMapping("/assign_user_to_service")
-    public String assignUserToService(@RequestParam int userId, @RequestParam int serviceId) {
-        serviceServiceClient.assignUserToService(userId, serviceId);
         return "redirect:/";
     }
 }
