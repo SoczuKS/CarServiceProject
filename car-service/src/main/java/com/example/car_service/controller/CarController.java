@@ -1,9 +1,12 @@
 package com.example.car_service.controller;
 
+import com.example.car_service.service_client.DatabaseServiceClient;
 import com.example.dto.Car;
 import com.example.dto.User;
-import com.example.car_service.service_client.DatabaseServiceClient;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 

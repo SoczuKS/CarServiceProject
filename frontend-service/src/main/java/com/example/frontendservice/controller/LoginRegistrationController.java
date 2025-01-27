@@ -25,15 +25,34 @@ public class LoginRegistrationController {
         this.userServiceClient = userServiceClient;
     }
 
+    @GetMapping("/register")
+    public String register(Model model) {
+        model.addAttribute("newUser", new User());
+        return "register";
+    }
+
     @GetMapping("/login")
     public String login() {
         return "login";
     }
 
-    @GetMapping("/register")
-    public String register(Model model) {
-        model.addAttribute("newUser", new User());
-        return "register";
+    @GetMapping("/storeUser")
+    public String storeUser(HttpSession session) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication.getPrincipal() instanceof CustomUserDetails userDetails) {
+            session.setAttribute("userId", userDetails.getId());
+            session.setAttribute("user", userDetails.getUser());
+        }
+        return "redirect:/";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request, HttpServletResponse response) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null) {
+            new SecurityContextLogoutHandler().logout(request, response, auth);
+        }
+        return "redirect:/";
     }
 
     @PostMapping("/register")
@@ -49,25 +68,6 @@ public class LoginRegistrationController {
             user.setLastName(null);
         }
         userServiceClient.addUser(user);
-        return "redirect:/";
-    }
-
-    @GetMapping("/logout")
-    public String logout(HttpServletRequest request, HttpServletResponse response) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null) {
-            new SecurityContextLogoutHandler().logout(request, response, auth);
-        }
-        return "redirect:/";
-    }
-
-    @GetMapping("/storeUser")
-    public String storeUser(HttpSession session) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication != null && authentication.getPrincipal() instanceof CustomUserDetails userDetails) {
-            session.setAttribute("userId", userDetails.getId());
-            session.setAttribute("user", userDetails.getUser());
-        }
         return "redirect:/";
     }
 }

@@ -18,5 +18,4 @@ public class CustomUserDetails extends org.springframework.security.core.userdet
     public int getId() {
         return user.getId();
     }
-
 }
