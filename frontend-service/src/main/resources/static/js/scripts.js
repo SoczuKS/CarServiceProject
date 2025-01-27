@@ -1,28 +1,3 @@
-function onLoad() {
-    let tabLinks = document.querySelectorAll('.tab_links');
-    tabLinks.forEach(function(link) {
-        link.addEventListener('click', function(event) {
-            openTab(event, link.getAttribute('data-tab'));
-        });
-    });
-    toggleClientData();
-}
-
-function openTab(event, tabName) {
-    let tabContent = document.getElementsByClassName("tab_content");
-    for (let i = 0; i < tabContent.length; i++) {
-        tabContent[i].style.display = "none";
-    }
-
-    let tabLinks = document.getElementsByClassName("tab_links");
-    for (let i = 0; i < tabLinks.length; i++) {
-        tabLinks[i].className = tabLinks[i].className.replace(" active", "");
-    }
-
-    document.getElementById(tabName).style.display = "block";
-    event.currentTarget.className += " active";
-}
-
 function setRequired(container, isRequired) {
     const elements = container.getElementsByTagName('input');
     for (let i = 0; i < elements.length; i++) {
@@ -32,9 +7,18 @@ function setRequired(container, isRequired) {
 
 function toggleClientData() {
     const individualClientData = document.getElementById('individual_client_data');
+    if (individualClientData === null) {
+        return;
+    }
     const companyClientData = document.getElementById('company_client_data');
-    const isIndividual = document.getElementById('individual').checked;
-    console.log("Przełączam na: " + (isIndividual ? "osobę fizyczną" : "firmę"));
+    if (companyClientData === null) {
+        return;
+    }
+    const individualCheckbox = document.getElementById('individual');
+    if (individualCheckbox === null) {
+        return;
+    }
+    const isIndividual = individualCheckbox.checked;
 
     if (isIndividual) {
         individualClientData.style.display = 'block';
@@ -46,5 +30,22 @@ function toggleClientData() {
         companyClientData.style.display = 'block';
         setRequired(individualClientData, false);
         setRequired(companyClientData, true);
+    }
+}
+
+function setupNumberInputEvents() {
+    document.getElementById("price").addEventListener("change", function (event) {
+        roundInputNumber(event, 2);
+    });
+    document.getElementById("quantity").addEventListener("change", function (event) {
+        roundInputNumber(event, 0);
+    });
+}
+
+function roundInputNumber(event, precision) {
+    const input = event.target;
+    const value = parseFloat(input.value);
+    if (!isNaN(value)) {
+        input.value = value.toFixed(precision);
     }
 }

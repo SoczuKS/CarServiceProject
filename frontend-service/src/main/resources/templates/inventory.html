@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="pl">
+<head>
+    <title>CarService</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css"/>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+    <script th:src="@{/js/scripts.js}"></script>
+</head>
+<body onLoad="setupNumberInputEvents()">
+<div id="menu" th:insert="~{fragments/menu :: body}"></div>
+<div id="content">
+    <h3>Magazyn</h3>
+    <div class="horizontal_panel">
+        <table>
+            <thead>
+            <tr>
+                <th>Nazwa</th>
+                <th>Cena</th>
+                <th>Ilość</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${items}">
+                <td th:text="${item.name}"></td>
+                <td th:text="${item.price}"></td>
+                <td th:text="${item.quantity}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="label_div">
+            <h2>Dodaj przedmiot</h2>
+            <form th:action="@{/add_item}" th:object="${newItem}" method="post">
+                <div>
+                    <label for="name">Nazwa:</label>
+                    <input type="text" id="name" th:field="*{name}" required>
+                </div>
+                <div>
+                    <label for="price">Cena:</label>
+                    <input type="number" id="price" th:field="*{price}" step="0.01" required>
+                </div>
+                <div>
+                    <label for="quantity">Ilość:</label>
+                    <input type="number" id="quantity" th:field="*{quantity}" required>
+                </div>
+                <button type="submit">Dodaj przedmiot</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

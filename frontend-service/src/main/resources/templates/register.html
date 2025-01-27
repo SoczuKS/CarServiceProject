@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <title>Rejestracja</title>
     <link rel="stylesheet" type="text/css" href="/css/login_register.css"/>
-    <script src="/js/scripts.js"></script>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+    <script th:src="@{/js/scripts.js}"></script>
 </head>
 <body onload="toggleClientData()">
 <form th:action="@{/register}" th:object="${newUser}" method="post">

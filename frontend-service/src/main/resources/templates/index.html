@@ -4,53 +4,9 @@
     <title>CarService</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="/css/styles.css"/>
-    <script src="/js/scripts.js"></script>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico"/>
 </head>
-<body onload="onLoad()">
-    <div class="tab">
-        <button class="tab_links" data-tab="employees"
-                sec:authorize="hasRole('ADMIN') or hasRole('MANAGER')">Pracownicy</button>
-        <button class="tab_links" data-tab="services"
-                sec:authorize="hasRole('ADMIN') or hasRole('MANAGER')">Serwisy</button>
-        <button class="tab_links" data-tab="inventory"
-                sec:authorize="hasRole('ADMIN') or hasRole('MANAGER') or hasRole('ACCOUNTANT')">Magazyn</button>
-        <button class="tab_links" data-tab="individual_clients"
-                sec:authorize="hasRole('ADMIN') or hasRole('MANAGER') or hasRole('ACCOUNTANT') or hasRole('MECHANIC')">Klienci indywidualni</button>
-        <button class="tab_links" data-tab="company_clients"
-                sec:authorize="hasRole('ADMIN') or hasRole('MANAGER') or hasRole('ACCOUNTANT') or hasRole('MECHANIC')">Klienci biznesowi</button>
-        <button class="tab_links" data-tab="cars"
-                sec:authorize="hasRole('CLIENT')">Flota</button>
-        <button class="tab_links" data-tab="service_employee_assignment"
-                sec:authorize="hasRole('ADMIN') or hasRole('MANAGER')">Przypisanie pracownika do serwisu</button>
-        <a href="/logout" class="tab_links logout_button">Wyloguj</a>
-    </div>
-
-    <div id="employees" class="tab_content"
-         sec:authorize="hasRole('ADMIN') or hasRole('MANAGER')"
-         th:insert="fragments/employees_panel :: body"></div>
-
-    <div id="services" class="tab_content"
-         sec:authorize="hasRole('ADMIN') or hasRole('MANAGER')"
-         th:insert="fragments/services_panel :: body"></div>
-
-    <div id="inventory" class="tab_content"
-         sec:authorize="hasRole('ADMIN') or hasRole('MANAGER') or hasRole('ACCOUNTANT')"
-         th:insert="fragments/inventory_panel :: body"></div>
-
-    <div id="individual_clients" class="tab_content"
-         sec:authorize="hasRole('ADMIN') or hasRole('MANAGER') or hasRole('ACCOUNTANT') or hasRole('MECHANIC')"
-         th:insert="fragments/individual_clients_panel :: body"></div>
-
-    <div id="company_clients" class="tab_content"
-         sec:authorize="hasRole('ADMIN') or hasRole('MANAGER') or hasRole('ACCOUNTANT') or hasRole('MECHANIC')"
-         th:insert="fragments/company_clients_panel :: body"></div>
-
-    <div id="cars" class="tab_content"
-         sec:authorize="hasRole('CLIENT')"
-         th:insert="fragments/cars_panel :: body"></div>
-
-    <div id="service_employee_assignment" class="tab_content"
-            sec:authorize="hasRole('ADMIN') or hasRole('MANAGER')"
-            th:insert="fragments/service_employee_assignment_panel :: body"></div>
+<body>
+    <div id="menu" th:insert="~{fragments/menu :: body}"></div>
 </body>
 </html>
