@@ -3,6 +3,8 @@ package com.example.database_service.controller;
 import com.example.database_service.entity.ServiceWork;
 import com.example.database_service.repository.ServiceWorkRepository;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -18,5 +20,10 @@ public class ServiceWorkController {
     @GetMapping("/service_works")
     public List<ServiceWork> getServiceWorks() {
         return serviceWorkRepository.findAll();
+    }
+
+    @PostMapping("/service_works")
+    public ServiceWork createServiceWork(@RequestBody ServiceWork serviceWork) {
+        return serviceWorkRepository.save(serviceWork);
     }
 }
