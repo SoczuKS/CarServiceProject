@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
-@FeignClient(name = "car-service", url = "http://localhost:8767")
+@FeignClient(name = "car-service")
 public interface CarServiceClient {
     @GetMapping("/get_cars_by_owner")
     List<Car> getCars(@RequestParam User user);

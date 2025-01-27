@@ -4,6 +4,8 @@ import com.dto.User;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -13,8 +15,8 @@ public interface DatabaseServiceClient {
     List<User> getUsers();
 
     @PostMapping("/users")
-    User addUser(User user);
+    User addUser(@RequestBody User user);
 
     @GetMapping("/get_user_by_email")
-    User getUserByEmail(String email);
+    User getUserByEmail(@RequestParam("email") String email);
 }

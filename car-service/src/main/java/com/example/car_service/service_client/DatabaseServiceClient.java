@@ -5,6 +5,7 @@ import com.dto.User;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -15,8 +16,8 @@ public interface DatabaseServiceClient {
     List<Car> getCars();
 
     @PostMapping("/cars")
-    Car addCar(Car car);
+    Car addCar(@RequestBody Car car);
 
     @GetMapping("/get_cars_by_owner")
-    List<Car> getCarsByOwner(@RequestParam User owner);
+    List<Car> getCarsByOwner(@RequestParam("owner") User owner);
 }

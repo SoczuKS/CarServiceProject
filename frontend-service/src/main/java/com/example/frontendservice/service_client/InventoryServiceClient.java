@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
-@FeignClient(name = "inventory-service", url = "http://localhost:8762")
+@FeignClient(name = "inventory-service")
 public interface InventoryServiceClient {
     @GetMapping("/items")
     List<Item> getItems();

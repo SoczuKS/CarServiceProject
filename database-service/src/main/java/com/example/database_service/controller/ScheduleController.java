@@ -2,12 +2,12 @@ package com.example.database_service.controller;
 
 import com.example.database_service.entity.Schedule;
 import com.example.database_service.repository.ScheduleRepository;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@Controller
+@RestController
 public class ScheduleController {
     private final ScheduleRepository scheduleRepository;
 

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
-@FeignClient(name = "user-service", url = "http://localhost:8763")
+@FeignClient(name = "user-service")
 public interface UserServiceClient {
     @GetMapping("/get_user_by_email")
     User getUserByEmail(@RequestParam String email);

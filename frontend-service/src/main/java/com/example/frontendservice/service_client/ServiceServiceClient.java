@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
-@FeignClient(name = "service-service", url = "http://localhost:8766")
+@FeignClient(name = "service-service")
 public interface ServiceServiceClient {
     @GetMapping("/services")
     List<Service> getServices();
