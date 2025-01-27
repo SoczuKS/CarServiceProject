@@ -1,6 +1,6 @@
 package com.example.user_service.controller;
 
-import com.dto.User;
+import com.example.dto.User;
 import com.example.user_service.service_client.DatabaseServiceClient;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,6 +1,6 @@
 package com.example.inventory_service.controller;
 
-import com.dto.Item;
+import com.example.dto.Item;
 import com.example.inventory_service.client_service.DatabaseServiceClient;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,4 +1,4 @@
-package com.dto;
+package com.example.dto;
 
 public enum ScheduleStatus {
     PENDING,

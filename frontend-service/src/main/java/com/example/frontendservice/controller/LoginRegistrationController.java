@@ -1,7 +1,7 @@
 package com.example.frontendservice.controller;
 
-import com.dto.Role;
-import com.dto.User;
+import com.example.dto.Role;
+import com.example.dto.User;
 import com.example.frontendservice.CustomUserDetails;
 import com.example.frontendservice.service_client.UserServiceClient;
 import jakarta.servlet.http.HttpServletRequest;

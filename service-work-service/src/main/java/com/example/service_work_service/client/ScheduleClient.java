@@ -1,6 +1,6 @@
 package com.example.service_work_service.client;
 
-import com.dto.Schedule;
+import com.example.dto.Schedule;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

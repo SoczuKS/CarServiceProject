@@ -1,7 +1,7 @@
 package com.example.car_service.controller;
 
-import com.dto.Car;
-import com.dto.User;
+import com.example.dto.Car;
+import com.example.dto.User;
 import com.example.car_service.service_client.DatabaseServiceClient;
 import org.springframework.web.bind.annotation.*;
 

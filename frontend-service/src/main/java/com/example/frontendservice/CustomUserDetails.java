@@ -1,6 +1,6 @@
 package com.example.frontendservice;
 
-import com.dto.User;
+import com.example.dto.User;
 import lombok.Getter;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 

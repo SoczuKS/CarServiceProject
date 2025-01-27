@@ -1,6 +1,6 @@
 package org.example.service_service;
 
-import com.dto.User;
+import com.example.dto.User;
 import org.example.service_service.client.UserClient;
 import org.example.service_service.entity.Service;
 
