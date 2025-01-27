@@ -1,41 +1,26 @@
 package org.example.service_service.controller;
 
-import org.example.service_service.ServiceService;
-import org.example.service_service.entity.Service;
+import com.example.dto.Service;
+import org.example.service_service.service_client.DatabaseServiceClient;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 public class ServiceController {
-    private final ServiceService serviceService;
+    private final DatabaseServiceClient databaseServiceClient;
 
-    public ServiceController(ServiceService serviceService) {
-        this.serviceService = serviceService;
-    }
-
-    @GetMapping("/get-service")
-    public Service getService(@RequestParam String name) {
-        return serviceService.getServiceByName(name);
-    }
-
-    @GetMapping("/get-service-by-address")
-    public Service getServiceByAddress(@RequestParam String address) {
-        return serviceService.getServiceByAddress(address);
+    public ServiceController(DatabaseServiceClient databaseServiceClient) {
+        this.databaseServiceClient = databaseServiceClient;
     }
 
     @GetMapping("/services")
     public List<Service> getServices() {
-        return serviceService.getServices();
+        return databaseServiceClient.getServices();
     }
 
     @PostMapping("/services")
     public Service addService(@RequestBody Service service) {
-        return serviceService.addService(service);
-    }
-
-    @PostMapping("/assign_user_to_service")
-    public void assignUserToService(@RequestParam int userId, @RequestParam int serviceId) {
-        serviceService.assignUserToService(userId, serviceId);
+        return databaseServiceClient.addService(service);
     }
 }
