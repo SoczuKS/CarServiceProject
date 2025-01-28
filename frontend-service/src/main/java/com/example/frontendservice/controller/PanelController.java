@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Arrays;
 import java.util.List;
@@ -39,19 +38,7 @@ public class PanelController {
     }
 
     @GetMapping("/")
-    public String index(@RequestParam(value = "page", required = false) String page, Model model) {
-        User loggedInUser = (User) httpSession.getAttribute("user");
-
-        List<User> allUsers = userServiceClient.getUsers();
-        List<User> employees = allUsers.stream().filter(u -> u.getRole() != Role.CLIENT).toList();
-        List<User> clients = allUsers.stream().filter(u -> u.getRole() == Role.CLIENT).toList();
-
-        model.addAttribute("roles", Role.values());
-        model.addAttribute("employees", employees);
-        model.addAttribute("newEmployee", new User());
-
-        model.addAttribute("employeesNoAdmin", employees.stream().filter(e -> e.getRole() != Role.ADMIN).toList());
-
+    public String index() {
         return "index";
     }
 
@@ -119,19 +106,19 @@ public class PanelController {
         employee.setPassword(new BCryptPasswordEncoder().encode(employee.getPassword()));
         employee.setActive(true);
         userServiceClient.addUser(employee);
-        return "redirect:/?page=employees";
+        return "redirect:/employees";
     }
 
     @PostMapping("/add_workshop")
     public String addWorkshops(@ModelAttribute Workshop workshop) {
         workshopServiceClient.addService(workshop);
-        return "redirect:/?page=workshops";
+        return "redirect:/workshops";
     }
 
     @PostMapping("/add_item")
     public String addItem(@ModelAttribute Item item) {
         inventoryServiceClient.addItem(item);
-        return "redirect:/?page=inventory";
+        return "redirect:/inventory";
     }
 
     @PostMapping("/add_individual_client")
@@ -140,7 +127,7 @@ public class PanelController {
         client.setRole(Role.CLIENT);
         client.setActive(true);
         userServiceClient.addUser(client);
-        return "redirect:/?page=individual_clients";
+        return "redirect:/individual_clients";
     }
 
     @PostMapping("/add_company_client")
@@ -149,13 +136,13 @@ public class PanelController {
         client.setRole(Role.CLIENT);
         client.setActive(true);
         userServiceClient.addUser(client);
-        return "redirect:/?page=company_clients";
+        return "redirect:/company_clients";
     }
 
     @PostMapping("/add_car")
     public String addCar(@ModelAttribute Car car) {
         car.setOwner((User) httpSession.getAttribute("user"));
         carServiceClient.addCar(car);
-        return "redirect:/?page=cars";
+        return "redirect:/cars";
     }
 }
