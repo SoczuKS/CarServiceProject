@@ -15,13 +15,8 @@ public class Commission {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @ManyToMany
-    @JoinTable(
-            name = "commission_services",
-            joinColumns = @JoinColumn(name = "commission_id"),
-            inverseJoinColumns = @JoinColumn(name = "service_id")
-    )
-    private Set<Service> services;
+    @OneToMany(mappedBy = "commission")
+    private Set<CommissionService> services;
 
     @Column(nullable = false)
     private WorkStatus status;

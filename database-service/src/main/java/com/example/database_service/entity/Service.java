@@ -23,6 +23,6 @@ public class Service {
     @Column(nullable = false)
     private float cost;
 
-    @ManyToMany(mappedBy = "services")
-    private Set<Commission> commissions;
+    @OneToMany(mappedBy = "service")
+    private Set<CommissionService> commissions;
 }

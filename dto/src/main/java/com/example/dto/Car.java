@@ -3,6 +3,8 @@ package com.example.dto;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Set;
+
 @Getter
 @Setter
 public class Car {
@@ -11,4 +13,5 @@ public class Car {
     private String model;
     private User owner;
     private int year;
+    private Set<Commission> commissions;
 }

@@ -1,0 +1,7 @@
+DELIMITER //
+CREATE TRIGGER IF NOT EXISTS update_last_modified BEFORE UPDATE ON users
+FOR EACH ROW
+BEGIN
+    SET NEW.updated_at = NOW();
+END;//
+DELIMITER ;
