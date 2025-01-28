@@ -112,10 +112,13 @@ public class PanelController {
 
     @GetMapping("/commissions")
     public String commissions(Model model) {
-        List<Commission> commissions = commissionServiceClient.getCommissions();
         List<Service> services = serviceServiceClient.getServices();
+        List<Car> cars = carServiceClient.getAllCars();
+        List<Workshop> workshops = workshopServiceClient.getWorkshops();
         model.addAttribute("services", services);
-        model.addAttribute("commissions", commissions);
+        model.addAttribute("cars", cars);
+        model.addAttribute("workshops", workshops);
+        model.addAttribute("workStatuses", WorkStatus.values());
         model.addAttribute("newCommission", new Commission());
         return "commissions";
     }

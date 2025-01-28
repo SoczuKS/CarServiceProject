@@ -15,12 +15,12 @@
             <thead>
             <tr>
                 <th> Id </th>
-                <th> Services </th>
+                <th> Usługi </th>
                 <th> Status </th>
-                <th> Commissioned At </th>
-                <th> Finished At </th>
-                <th> Car </th>
-                <th> Workshop </th>
+                <th> Data zlecenia </th>
+                <th> Data ukończenia </th>
+                <th> Samochód </th>
+                <th> Serwis </th>
             </tr>
             </thead>
             <tbody>
@@ -39,6 +39,57 @@
             </tr>
             </tbody>
         </table>
+        <div class="label_div">
+        <h3>Dodaj nowe zlecenie</h3>
+            <form th:action="@{/commissions}" method="post">
+                <div>
+                    <label for="services">Usługi:</label>
+                    <select id="services" name="serviceIds" multiple>
+                        <option value="" disabled>Select services</option>
+                        <th:block th:each="service : ${services}">
+                            <option th:value="${service.id}" th:text="${service.name}"></option>
+                        </th:block>
+                    </select>
+                </div>
+                <div>
+                    <label for="status">Status:</label>
+                    <select id="status" name="status" required>
+                        <th:block th:each="status : ${workStatuses}">
+                            <option th:value="${status}" th:text="${status.name()}"></option>
+                        </th:block>
+                    </select>
+                </div>
+                <div>
+                    <label for="commissionedAt">Data zlecenia:</label>
+                    <input type="datetime-local" id="commissionedAt" name="commissionedAt" th:value="${#calendars.format(#calendars.createNow(), 'dd MMM yyyy HH:mm')}" required>
+                </div>
+                <div>
+                    <label for="finishedAt">Data ukończenia:</label>
+                    <input type="date" id="finishedAt" name="finishedAt">
+                </div>
+                <div>
+                    <label for="car">Samochód:</label>
+                    <select id="car" name="carId" required>
+                        <option value="" disabled>Select car</option>
+                        <th:block th:each="car : ${cars}">
+                            <option th:value="${car.id}" th:text="${car.brand}"></option>
+                        </th:block>
+                    </select>
+                </div>
+                <div>
+                    <label for="workshop">Serwis:</label>
+                    <select id="workshop" name="workshopId" required>
+                        <option value="" disabled>Select workshop</option>
+                        <th:block th:each="workshop : ${workshops}">
+                            <option th:value="${workshop.id}" th:text="${workshop.name}"></option>
+                        </th:block>
+                    </select>
+                </div>
+                <div>
+                    <button type="submit">Dodaj</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 </body>
