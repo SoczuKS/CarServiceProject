@@ -1,11 +1,8 @@
 package com.example.database_service.controller;
 
-import com.example.database_service.entity.Workshop;
+import com.example.database_service.entity.Service;
 import com.example.database_service.repository.ServiceRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,13 +14,18 @@ public class ServiceController {
         this.serviceRepository = serviceRepository;
     }
 
-    @GetMapping("/workshops")
-    public List<Workshop> getServices() {
+    @GetMapping("/services")
+    public List<Service> getServices() {
         return serviceRepository.findAll();
     }
 
-    @PostMapping("/workshops")
-    public Workshop addService(@RequestBody Workshop workshop) {
-        return serviceRepository.save(workshop);
+    @PostMapping("/services")
+    public Service addService(@RequestBody Service service) {
+        return serviceRepository.save(service);
+    }
+
+    @GetMapping("/get_service_by_name")
+    public Service getServiceByName(@RequestParam("name") String name) {
+        return serviceRepository.findByName(name);
     }
 }
