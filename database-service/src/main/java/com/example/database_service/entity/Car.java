@@ -29,5 +29,5 @@ public class Car {
     private int year;
 
     @OneToMany(mappedBy = "car")
-    private Set<ServiceWork> serviceWorks;
+    private Set<Commission> commissions;
 }

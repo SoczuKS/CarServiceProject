@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CarService</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css"/>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+</head>
+<body>
+    <div id="menu" th:insert="~{fragments/menu :: body}"></div>
+    <div id="content">
+        <h3> Zadania </h3>
+        <div class="horizontal_panel">
+            <table>
+                <thead>
+                <tr>
+                    <th> Id </th>
+                    <th> Nazwa </th>
+                    <th> Cena </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="task : ${tasks}">
+                    <td th:text="${task.id}"></td>
+                    <td th:text="${task.name}"></td>
+                    <td th:text="${task.cost}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

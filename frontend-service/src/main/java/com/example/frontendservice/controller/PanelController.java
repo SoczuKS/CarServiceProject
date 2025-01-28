@@ -1,10 +1,7 @@
 package com.example.frontendservice.controller;
 
 import com.example.dto.*;
-import com.example.frontendservice.service_client.CarServiceClient;
-import com.example.frontendservice.service_client.InventoryServiceClient;
-import com.example.frontendservice.service_client.UserServiceClient;
-import com.example.frontendservice.service_client.WorkshopServiceClient;
+import com.example.frontendservice.service_client.*;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -22,6 +19,9 @@ public class PanelController {
     private final WorkshopServiceClient workshopServiceClient;
     private final InventoryServiceClient inventoryServiceClient;
     private final CarServiceClient carServiceClient;
+    private final CommissionServiceClient commissionServiceClient;
+    private final TaskServiceClient taskServiceClient;
+    private final ServiceServiceClient serviceServiceClient;
     private final HttpSession httpSession;
 
     public PanelController(
@@ -29,11 +29,17 @@ public class PanelController {
             WorkshopServiceClient workshopServiceClient,
             InventoryServiceClient inventoryServiceClient,
             CarServiceClient carServiceClient,
+            CommissionServiceClient commissionServiceClient,
+            TaskServiceClient taskServiceClient,
+            ServiceServiceClient serviceServiceClient,
             HttpSession httpSession) {
         this.userServiceClient = userServiceClient;
         this.workshopServiceClient = workshopServiceClient;
         this.inventoryServiceClient = inventoryServiceClient;
         this.carServiceClient = carServiceClient;
+        this.commissionServiceClient = commissionServiceClient;
+        this.taskServiceClient = taskServiceClient;
+        this.serviceServiceClient = serviceServiceClient;
         this.httpSession = httpSession;
     }
 
@@ -101,6 +107,27 @@ public class PanelController {
         return "service_employee_assignment";
     }
 
+    @GetMapping("/commissions")
+    public String commissions(Model model) {
+        List<Commission> commissions = commissionServiceClient.getCommissions();
+        model.addAttribute("commissions", commissions);
+        return "commissions";
+    }
+
+    @GetMapping("/tasks")
+    public String tasks(Model model) {
+        List<Task> tasks = taskServiceClient.getTasks();
+        model.addAttribute("tasks", tasks);
+        return "tasks";
+    }
+
+    @GetMapping("/services")
+    public String services(Model model) {
+        List<Service> services = serviceServiceClient.getServices();
+        model.addAttribute("services", services);
+        return "services";
+    }
+
     @PostMapping("/add_employee")
     public String addUser(@ModelAttribute User employee) {
         employee.setPassword(new BCryptPasswordEncoder().encode(employee.getPassword()));
@@ -144,5 +171,23 @@ public class PanelController {
         car.setOwner((User) httpSession.getAttribute("user"));
         carServiceClient.addCar(car);
         return "redirect:/cars";
+    }
+
+    @PostMapping("/commissions")
+    public String addCommission(@ModelAttribute Commission commission) {
+        commissionServiceClient.addCommission(commission);
+        return "redirect:/commissions";
+    }
+
+    @PostMapping("/tasks")
+    public String addTask(@ModelAttribute Task task) {
+        taskServiceClient.addTask(task);
+        return "redirect:/tasks";
+    }
+
+    @PostMapping("/services")
+    public String addService(@ModelAttribute Service service) {
+        serviceServiceClient.addService(service);
+        return "redirect:/services";
     }
 }
