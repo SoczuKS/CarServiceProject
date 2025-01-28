@@ -7,9 +7,9 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico"/>
 </head>
 <body>
-  <div id="menu" th:insert="~{fragments/menu :: body}"></div>
-  <div id="content">
-    <h3> Usługi </h3>
+<div id="menu" th:insert="~{fragments/menu :: body}"></div>
+<div id="content">
+    <h3>Usługi</h3>
     <div class="horizontal_panel">
         <table>
             <thead>
@@ -17,7 +17,9 @@
                 <th> Id </th>
                 <th> Nazwa </th>
                 <th> Opis </th>
-                <th> Cena </th>
+                <th> Koszt </th>
+                <th> Zlecenia </th>
+                <th> Zadania </th>
             </tr>
             </thead>
             <tbody>
@@ -25,11 +27,41 @@
                 <td th:text="${service.id}"></td>
                 <td th:text="${service.name}"></td>
                 <td th:text="${service.description}"></td>
-                <td th:text="${service.cost}"></td>
+                <td th:text="${#numbers.formatDecimal(service.cost, 2, 'POINT')}"></td>
+                <td>
+                    <ul>
+                        <li th:each="commission : ${service.commissions}" th:text="${commission.id}"></li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li th:each="task : ${service.tasks}" th:text="${task.name}"></li>
+                    </ul>
+                </td>
             </tr>
             </tbody>
         </table>
     </div>
-  </div>
+    <h3>Dodaj nową usługę</h3>
+    <form th:action="@{/services}" method="post">
+        <div>
+            <label for="name">Nazwa:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div>
+            <label for="description">Opis:</label>
+            <input type="text" id="description" name="description" required>
+        </div>
+        <div>
+            <label for="tasks">Zadania:</label>
+            <select id="tasks" name="tasks" multiple>
+                <option th:each="task : ${allTasks}" th:value="${task.id}" th:text="${task.name}"></option>
+            </select>
+        </div>
+        <div>
+            <button type="submit">Dodaj</button>
+        </div>
+    </form>
+</div>
 </body>
 </html>

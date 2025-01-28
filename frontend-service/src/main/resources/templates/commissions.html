@@ -7,35 +7,39 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico"/>
 </head>
 <body>
-    <div id="menu" th:insert="~{fragments/menu :: body}"></div>
-    <div id="content">
-        <h3>Zlecenia</h3>
-        <div class="horizontal_panel">
-           <table>
-               <thead>
-               <tr>
-                   <th> Id </th>
-                   <th> Services </th>
-                   <th> Status </th>
-                   <th> Commissioned At </th>
-                   <th> Finished At </th>
-                   <th> Car </th>
-                   <th> Workshop </th>
-                </tr>
-               </thead>
-                <tbody>
-                <tr th:each="commission : ${commissions}">
-                    <td th:text="${commission.id}"></td>
-                    <td th:text="${commission.services}"></td>
-                    <td th:text="${commission.status}"></td>
-                    <td th:text="${commission.commissionedAt}"></td>
-                    <td th:text="${commission.finishedAt}"></td>
-                    <td th:text="${commission.car}"></td>
-                    <td th:text="${commission.workshop}"></td>
-                </tr>
-                </tbody>
-           </table>
-        </div>
+<div id="menu" th:insert="~{fragments/menu :: body}"></div>
+<div id="content">
+    <h3>Zlecenia</h3>
+    <div class="horizontal_panel">
+        <table>
+            <thead>
+            <tr>
+                <th> Id </th>
+                <th> Services </th>
+                <th> Status </th>
+                <th> Commissioned At </th>
+                <th> Finished At </th>
+                <th> Car </th>
+                <th> Workshop </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="commission : ${commissions}">
+                <td th:text="${commission.id}"></td>
+                <td>
+                    <ul>
+                        <li th:each="service : ${commission.services}" th:text="${service.name}"></li>
+                    </ul>
+                </td>
+                <td th:text="${commission.status}"></td>
+                <td th:text="${commission.commissionedAt}"></td>
+                <td th:text="${commission.finishedAt}"></td>
+                <td th:text="${commission.car}"></td>
+                <td th:text="${commission.workshop}"></td>
+            </tr>
+            </tbody>
+        </table>
     </div>
+</div>
 </body>
 </html>
