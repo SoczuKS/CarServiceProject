@@ -29,14 +29,14 @@
         </table>
     </div>
     <h3>Dodaj nowe zadanie</h3>
-    <form th:action="@{/tasks}" method="post">
+    <form th:action="@{/tasks}" th:object="${newTask}" method="post">
         <div>
             <label for="name">Nazwa:</label>
-            <input type="text" id="name" name="name" required>
+            <input type="text" id="name" name="name" required th:field="*{name}">
         </div>
         <div>
             <label for="cost">Cena:</label>
-            <input type="number" id="cost" name="cost" step="0.01" required>
+            <input type="number" id="cost" name="cost" step="0.01" required th:field="*{cost}">
         </div>
         <div>
             <button type="submit">Dodaj</button>

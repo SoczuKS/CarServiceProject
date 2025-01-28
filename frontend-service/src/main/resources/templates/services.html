@@ -27,7 +27,7 @@
                 <td th:text="${service.id}"></td>
                 <td th:text="${service.name}"></td>
                 <td th:text="${service.description}"></td>
-                <td th:text="${#numbers.formatDecimal(service.cost, 2, 'POINT')}"></td>
+                <td th:text="${#numbers.formatDecimal(service.cost, 1, 2)}"></td>
                 <td>
                     <ul>
                         <li th:each="commission : ${service.commissions}" th:text="${commission.id}"></li>
@@ -43,18 +43,18 @@
         </table>
     </div>
     <h3>Dodaj nową usługę</h3>
-    <form th:action="@{/services}" method="post">
+    <form th:action="@{/services}" method="post" th:object="${newService}">
         <div>
             <label for="name">Nazwa:</label>
-            <input type="text" id="name" name="name" required>
+            <input type="text" id="name" name="name" required th:field="*{name}">
         </div>
         <div>
             <label for="description">Opis:</label>
-            <input type="text" id="description" name="description" required>
+            <input type="text" id="description" name="description" required th:field="*{description}">
         </div>
         <div>
             <label for="tasks">Zadania:</label>
-            <select id="tasks" name="tasks" multiple>
+            <select id="tasks" name="taskIds" multiple required>
                 <option th:each="task : ${allTasks}" th:value="${task.id}" th:text="${task.name}"></option>
             </select>
         </div>

@@ -12,4 +12,16 @@ import java.io.Serializable;
 public class CommissionServiceId implements Serializable {
     private int commissionId;
     private int serviceId;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof CommissionServiceId that)) return false;
+        return this.getCommissionId() == that.getCommissionId() && this.getServiceId() == that.getServiceId();
+    }
+
+    @Override
+    public int hashCode() {
+        return ((commissionId + serviceId) * (commissionId + serviceId + 1)) / 2 + serviceId;
+    }
 }

@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class PanelController {
@@ -111,7 +113,10 @@ public class PanelController {
     @GetMapping("/commissions")
     public String commissions(Model model) {
         List<Commission> commissions = commissionServiceClient.getCommissions();
+        List<Service> services = serviceServiceClient.getServices();
+        model.addAttribute("services", services);
         model.addAttribute("commissions", commissions);
+        model.addAttribute("newCommission", new Commission());
         return "commissions";
     }
 
@@ -119,13 +124,17 @@ public class PanelController {
     public String tasks(Model model) {
         List<Task> tasks = taskServiceClient.getTasks();
         model.addAttribute("tasks", tasks);
+        model.addAttribute("newTask", new Task());
         return "tasks";
     }
 
     @GetMapping("/services")
     public String services(Model model) {
         List<Service> services = serviceServiceClient.getServices();
+        List<Task> tasks = taskServiceClient.getTasks();
+        model.addAttribute("allTasks", tasks);
         model.addAttribute("services", services);
+        model.addAttribute("newService", new Service());
         return "services";
     }
 
@@ -200,7 +209,9 @@ public class PanelController {
     }
 
     @PostMapping("/services")
-    public String addService(@ModelAttribute Service service) {
+    public String addService(@ModelAttribute Service service, @RequestParam("taskIds") List<Integer> taskIds) {
+        List<Task> tasks = taskServiceClient.getTasks().stream().filter(t -> taskIds.contains(t.getId())).toList();
+        service.setTasks(new HashSet<>(tasks));
         serviceServiceClient.addService(service);
         return "redirect:/services";
     }
