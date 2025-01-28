@@ -1,5 +1,7 @@
 package com.example.database_service.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -43,10 +45,12 @@ public class User {
     private String TIN;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "owner")
+    @JsonManagedReference
     private Set<Car> cars;
 
     @JoinColumn
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
     private Workshop workshop;
 
     @PrePersist

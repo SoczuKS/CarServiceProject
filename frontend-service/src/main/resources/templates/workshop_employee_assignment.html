@@ -51,16 +51,16 @@
 
         <div class="vertical_panel">
             <h4>Przypisz użytkownika do serwisu</h4>
-            <form th:action="@{/assign_user_to_service}" method="post">
+            <form th:action="@{/workshop_employee_assignment}" method="post">
                 <div>
                     <label for="user">Użytkownik:</label>
-                    <select id="user" name="userId" required>
+                    <select id="user" name="employeeId" required>
                         <option th:each="employee : ${employees}" th:value="${employee.id}" th:text="${employee.firstName} + ' ' + ${employee.lastName}"></option>
                     </select>
                 </div>
                 <div>
                     <label for="workshop">Serwis:</label>
-                    <select id="workshop" name="serviceId" required>
+                    <select id="workshop" name="workshopId" required>
                         <option th:each="workshop : ${workshops}" th:value="${workshop.id}" th:text="${workshop.name}"></option>
                     </select>
                 </div>

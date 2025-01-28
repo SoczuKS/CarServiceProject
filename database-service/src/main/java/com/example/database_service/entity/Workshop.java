@@ -1,5 +1,6 @@
 package com.example.database_service.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,6 +28,7 @@ public class Workshop {
     @Column(nullable = false)
     private String description;
 
-    @OneToMany(mappedBy = "workshop")
+    @OneToMany(mappedBy = "workshop", fetch = FetchType.LAZY)
+    @JsonManagedReference
     private Set<User> employees;
 }

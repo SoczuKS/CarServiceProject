@@ -13,11 +13,9 @@ import java.util.Set;
 @RestController
 public class ServiceController {
     private final ServiceRepository serviceRepository;
-    private final TaskRepository taskRepository;
 
-    public ServiceController(ServiceRepository serviceRepository, TaskRepository taskRepository) {
+    public ServiceController(ServiceRepository serviceRepository) {
         this.serviceRepository = serviceRepository;
-        this.taskRepository = taskRepository;
     }
 
     @GetMapping("/services")
@@ -26,17 +24,7 @@ public class ServiceController {
     }
 
     @PostMapping("/services")
-    public Service addService(@RequestParam String name, @RequestParam String description, @RequestParam Set<Integer> taskIds) {
-        Service service = new Service();
-        service.setName(name);
-        service.setDescription(description);
-
-        Set<Task> selectedTasks = new HashSet<>();
-        for (Integer taskId : taskIds) {
-            taskRepository.findById(taskId).ifPresent(selectedTasks::add);
-        }
-        service.setTasks(selectedTasks);
-
+    public Service addService(@RequestBody Service service) {
         return serviceRepository.save(service);
     }
 

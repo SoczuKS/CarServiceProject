@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Arrays;
 import java.util.List;
@@ -98,13 +99,13 @@ public class PanelController {
         return "cars";
     }
 
-    @GetMapping("/service_employee_assignment")
+    @GetMapping("/workshop_employee_assignment")
     public String serviceEmployeeAssignment(Model model) {
         List<User> employees = userServiceClient.getUsers().stream().filter(u -> u.getRole() != Role.CLIENT && u.getRole() != Role.ADMIN).toList();
         List<Workshop> workshops = workshopServiceClient.getWorkshops();
         model.addAttribute("employees", employees);
         model.addAttribute("workshops", workshops);
-        return "service_employee_assignment";
+        return "workshop_employee_assignment";
     }
 
     @GetMapping("/commissions")
@@ -171,6 +172,19 @@ public class PanelController {
         car.setOwner((User) httpSession.getAttribute("user"));
         carServiceClient.addCar(car);
         return "redirect:/cars";
+    }
+
+    @PostMapping("/workshop_employee_assignment")
+    public String assignEmployeeToWorkshop(@RequestParam("employeeId") int employeeId, @RequestParam("workshopId") int workshopId) {
+        Workshop workshop = workshopServiceClient.getWorkshops().stream().filter(s -> s.getId() == workshopId).findFirst().orElse(null);
+        User employee = userServiceClient.getUsers().stream().filter(u -> u.getId() == employeeId).findFirst().orElse(null);
+
+        if (workshop != null && employee != null) {
+            employee.setWorkshop(workshop);
+            userServiceClient.addUser(employee);
+        }
+
+        return "redirect:/workshop_employee_assignment";
     }
 
     @PostMapping("/commissions")

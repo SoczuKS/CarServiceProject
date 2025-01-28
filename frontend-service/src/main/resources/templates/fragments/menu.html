@@ -18,7 +18,7 @@
             sec:authorize="hasRole('ADMIN') or hasRole('MANAGER') or hasRole('ACCOUNTANT') or hasRole('MECHANIC')">Klienci biznesowi</a>
     <a href="/cars" class="menu_item"
             sec:authorize="hasRole('CLIENT')">Flota</a>
-    <a href="/service_employee_assignment" class="menu_item"
+    <a href="/workshop_employee_assignment" class="menu_item"
             sec:authorize="hasRole('ADMIN') or hasRole('MANAGER')">Przypisanie pracownika do serwisu</a>
     <a href="/commissions" class="menu_item"
             sec:authorize="hasRole('ADMIN') or hasRole('MANAGER') or hasRole('MECHANIC')">Zlecenia</a>
