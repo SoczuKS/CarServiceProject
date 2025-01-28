@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-public class CommissionControler {
+public class CommissionController {
     private final DatabaseServiceClient databaseServiceClient;
 
-    public CommissionControler(DatabaseServiceClient databaseServiceClient) {
+    public CommissionController(DatabaseServiceClient databaseServiceClient) {
         this.databaseServiceClient = databaseServiceClient;
     }
 

@@ -115,9 +115,11 @@ public class PanelController {
         List<Service> services = serviceServiceClient.getServices();
         List<Car> cars = carServiceClient.getAllCars();
         List<Workshop> workshops = workshopServiceClient.getWorkshops();
+        List<Commission> commissions = commissionServiceClient.getCommissions();
         model.addAttribute("services", services);
         model.addAttribute("cars", cars);
         model.addAttribute("workshops", workshops);
+        model.addAttribute("commissions", commissions);
         model.addAttribute("workStatuses", WorkStatus.values());
         model.addAttribute("newCommission", new Commission());
         return "commissions";

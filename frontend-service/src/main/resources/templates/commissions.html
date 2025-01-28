@@ -28,7 +28,7 @@
                 <td th:text="${commission.id}"></td>
                 <td>
                     <ul>
-                        <li th:each="service : ${commission.services}" th:text="${service.name}"></li>
+                        <li th:each="service : ${commission.services}" th:text="${service.service.name}"></li>
                     </ul>
                 </td>
                 <td th:text="${commission.status}"></td>
