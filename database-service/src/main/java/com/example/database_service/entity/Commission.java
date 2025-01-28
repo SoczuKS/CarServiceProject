@@ -16,7 +16,11 @@ public class Commission {
     private int id;
 
     @ManyToMany
-    @Column(nullable = false)
+    @JoinTable(
+            name = "commission_services",
+            joinColumns = @JoinColumn(name = "commission_id"),
+            inverseJoinColumns = @JoinColumn(name = "service_id")
+    )
     private Set<Service> services;
 
     @Column(nullable = false)
