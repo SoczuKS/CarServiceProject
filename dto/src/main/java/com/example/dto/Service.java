@@ -13,4 +13,5 @@ public class Service {
     private String description;
     private float cost;
     private Set<CommissionService> commissions;
+    private Set<Task> tasks;
 }

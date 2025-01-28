@@ -4,7 +4,6 @@ import com.example.database_service.entity.Service;
 import com.example.database_service.entity.Task;
 import com.example.database_service.repository.ServiceRepository;
 import com.example.database_service.repository.TaskRepository;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashSet;
@@ -22,11 +21,8 @@ public class ServiceController {
     }
 
     @GetMapping("/services")
-    public String getServices(Model model) {
-        model.addAttribute("services", serviceRepository.findAll());
-        List<Task> allTasks = taskRepository.findAll();
-        model.addAttribute("allTasks", allTasks);
-        return "services";
+    public List<Service> getServices() {
+        return serviceRepository.findAll();
     }
 
     @PostMapping("/services")
