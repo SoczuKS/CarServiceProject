@@ -7,25 +7,23 @@
 <body>
 <nav>
     <a href="/employees" class="menu_item"
-            sec:authorize="hasRole('ADMIN') or hasRole('MANAGER')">Pracownicy</a>
+       sec:authorize="hasRole('ADMIN') or hasRole('MANAGER')">Pracownicy</a>
     <a href="/workshops" class="menu_item"
-            sec:authorize="hasRole('ADMIN') or hasRole('MANAGER')">Serwisy</a>
+       sec:authorize="hasRole('ADMIN') or hasRole('MANAGER')">Serwisy</a>
     <a href="/inventory" class="menu_item"
-            sec:authorize="hasRole('ADMIN') or hasRole('MANAGER') or hasRole('ACCOUNTANT')">Magazyn</a>
+       sec:authorize="hasRole('ADMIN') or hasRole('MANAGER') or hasRole('ACCOUNTANT')">Magazyn</a>
     <a href="/individual_clients" class="menu_item"
-            sec:authorize="hasRole('ADMIN') or hasRole('MANAGER') or hasRole('ACCOUNTANT') or hasRole('MECHANIC')">Klienci indywidualni</a>
+       sec:authorize="hasRole('ADMIN') or hasRole('MANAGER') or hasRole('ACCOUNTANT') or hasRole('MECHANIC')">Klienci indywidualni</a>
     <a href="/company_clients" class="menu_item"
-            sec:authorize="hasRole('ADMIN') or hasRole('MANAGER') or hasRole('ACCOUNTANT') or hasRole('MECHANIC')">Klienci biznesowi</a>
+       sec:authorize="hasRole('ADMIN') or hasRole('MANAGER') or hasRole('ACCOUNTANT') or hasRole('MECHANIC')">Klienci biznesowi</a>
     <a href="/cars" class="menu_item"
-            sec:authorize="hasRole('CLIENT')">Flota</a>
-    <a href="/workshop_employee_assignment" class="menu_item"
-            sec:authorize="hasRole('ADMIN') or hasRole('MANAGER')">Przypisanie pracownika do serwisu</a>
+       sec:authorize="hasRole('CLIENT')">Flota</a>
     <a href="/commissions" class="menu_item"
-            sec:authorize="hasRole('ADMIN') or hasRole('MANAGER') or hasRole('MECHANIC') or hasRole('CLIENT')">Zlecenia</a>
+       sec:authorize="hasRole('ADMIN') or hasRole('MANAGER') or hasRole('MECHANIC') or hasRole('CLIENT')">Zlecenia</a>
     <a href ="/tasks" class="menu_item"
-            sec:authorize="hasRole('ADMIN') or hasRole('MANAGER') or hasRole('MECHANIC')">Zadania</a>
+       sec:authorize="hasRole('ADMIN') or hasRole('MANAGER') or hasRole('MECHANIC')">Zadania</a>
     <a href="/services" class="menu_item"
-            sec:authorize="hasRole('ADMIN') or hasRole('MANAGER') or hasRole ('CLIENT')">Usługi</a>
+       sec:authorize="hasRole('ADMIN') or hasRole('MANAGER') or hasRole('MECHANIC') or hasRole('CLIENT')">Usługi</a>
     <a href="/logout" class="menu_item logout_button">Wyloguj</a>
 </nav>
 </body>

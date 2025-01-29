@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="pl">
+<head>
+    <title>CarService</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css"/>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+</head>
+<body>
+<div id="menu" th:insert="~{fragments/menu :: body}"></div>
+<div id="content">
+    <div class="horizontal_panel">
+        <div class="vertical_panel">
+            <p th:text="${workshop.name}"></p>
+            <p th:text="|Adres: ${workshop.address}|"></p>
+            <p th:text="|Numer telefonu: ${workshop.phone}|"></p>
+            <p th:text="|Opis: ${workshop.description}|"></p>
+            <p>Pracownicy</p>
+            <ul>
+                <li th:each="employee : ${workshop.employees}">
+                    <span th:text="|${employee.role}: ${employee.firstName} ${employee.lastName}|"></span>
+                </li>
+            </ul>
+        </div>
+        <div class="vertical_panel" sec:authorize="hasRole('ADMIN') or hasRole('MANAGER')">
+            <h2>Przypisz pracownika</h2>
+            <form th:action="@{/workshop_employee_assignment}" method="post">
+                <div>
+                    <label for="user">Użytkownik:</label>
+                    <select id="user" name="employeeId" required>
+                        <option th:each="employee : ${notAssignedEmployees}" th:value="${employee.id}" th:text="${employee.firstName} + ' ' + ${employee.lastName}"></option>
+                    </select>
+                </div>
+                <div class="hidden">
+                    <label for="workshop">Serwis:</label>
+                    <input type="number" id="workshop" name="workshopId" th:value="${workshop.id}" required>
+                </div>
+                <button type="submit">Przypisz</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

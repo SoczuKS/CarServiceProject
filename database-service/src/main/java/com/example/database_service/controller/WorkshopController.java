@@ -19,6 +19,11 @@ public class WorkshopController {
         return workshopRepository.findAll();
     }
 
+    @GetMapping("/workshop/{id}")
+    public Workshop getServiceById(@PathVariable("id") Long id) {
+        return workshopRepository.findById(id).orElse(null);
+    }
+
     @PostMapping("/workshops")
     public Workshop addService(@RequestBody Workshop workshop) {
         return workshopRepository.save(workshop);

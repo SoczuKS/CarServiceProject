@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>CarService</title>
@@ -41,27 +41,28 @@
             </tr>
             </tbody>
         </table>
-    </div>
-    <h3>Dodaj nową usługę</h3>
-    <form th:action="@{/services}" method="post" th:object="${newService}">
-        <div>
-            <label for="name">Nazwa:</label>
-            <input type="text" id="name" name="name" required th:field="*{name}">
+        <div sec:authorize="hasRole('ADMIN') or hasRole('MANAGER') or hasRole('MECHANIC')">
+            <h3>Dodaj nową usługę</h3>
+            <form th:action="@{/services}" method="post" th:object="${newService}">
+                <div>
+                    <label for="name">Nazwa:</label>
+                    <input type="text" id="name" name="name" required th:field="*{name}">
+                </div>
+                <div>
+                    <label for="description">Opis:</label>
+                    <input type="text" id="description" name="description" required th:field="*{description}">
+                </div>
+                <div>
+                    <label for="tasks">Zadania:</label>
+                    <select id="tasks" name="taskIds" multiple required>
+                        <option th:each="task : ${allTasks}" th:value="${task.id}" th:text="${task.name}"></option>
+                    </select>
+                </div>
+                <div>
+                    <button type="submit">Dodaj</button>
+                </div>
+            </form>
         </div>
-        <div>
-            <label for="description">Opis:</label>
-            <input type="text" id="description" name="description" required th:field="*{description}">
-        </div>
-        <div>
-            <label for="tasks">Zadania:</label>
-            <select id="tasks" name="taskIds" multiple required>
-                <option th:each="task : ${allTasks}" th:value="${task.id}" th:text="${task.name}"></option>
-            </select>
-        </div>
-        <div>
-            <button type="submit">Dodaj</button>
-        </div>
-    </form>
 </div>
 </body>
 </html>

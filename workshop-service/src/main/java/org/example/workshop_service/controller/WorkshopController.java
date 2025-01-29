@@ -15,12 +15,17 @@ public class WorkshopController {
     }
 
     @GetMapping("/workshops")
-    public List<Workshop> getServices() {
+    public List<Workshop> getWorkshops() {
         return databaseServiceClient.getWorkshops();
     }
 
+    @GetMapping("/workshop/{id}")
+    public Workshop getWorkshopById(@PathVariable("id") Long id) {
+        return databaseServiceClient.getWorkshopById(id);
+    }
+
     @PostMapping("/workshops")
-    public Workshop addService(@RequestBody Workshop workshop) {
+    public Workshop addWorkshop(@RequestBody Workshop workshop) {
         return databaseServiceClient.addWorkshops(workshop);
     }
 

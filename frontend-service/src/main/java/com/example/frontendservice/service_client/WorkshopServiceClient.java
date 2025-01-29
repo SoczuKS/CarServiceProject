@@ -11,9 +11,11 @@ import java.util.List;
 
 @FeignClient(name = "workshop-service")
 public interface WorkshopServiceClient {
-
     @GetMapping("/workshops")
     List<Workshop> getWorkshops();
+
+    @GetMapping("/workshop/{id}")
+    Workshop getWorkshopById(@PathVariable("id") Long id);
 
     @PostMapping("/workshops")
     Workshop addService(@RequestBody Workshop workshop);

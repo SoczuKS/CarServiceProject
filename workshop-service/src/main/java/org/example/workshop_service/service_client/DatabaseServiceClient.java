@@ -14,6 +14,9 @@ public interface DatabaseServiceClient {
     @GetMapping("/workshops")
     List<Workshop> getWorkshops();
 
+    @GetMapping("/workshop/{id}")
+    Workshop getWorkshopById(@PathVariable("id") Long id);
+
     @PostMapping("/workshops")
     Workshop addWorkshops(@RequestBody Workshop workshop);
 

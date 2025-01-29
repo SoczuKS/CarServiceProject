@@ -6,10 +6,7 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -71,6 +68,33 @@ public class PanelController {
         return "workshops";
     }
 
+    @GetMapping("/workshop/{id}")
+    public String workshop(Model model, @PathVariable("id") Long id) {
+        Workshop workshop = workshopServiceClient.getWorkshopById(id);
+        List<User> notAssignedEmployees =
+                userServiceClient
+                        .getUsers()
+                        .stream()
+                        .filter(u -> {
+                            if (u.getRole() == Role.CLIENT) {
+                                return false;
+                            }
+                            if (u.getRole() == Role.ADMIN) {
+                                return false;
+                            }
+                            for (User employee : workshop.getEmployees()) {
+                                if (employee.getId() == u.getId()) {
+                                    return false;
+                                }
+                            }
+                            return true;
+                        })
+                        .toList();
+        model.addAttribute("workshop", workshop);
+        model.addAttribute("notAssignedEmployees", notAssignedEmployees);
+        return "workshop";
+    }
+
     @GetMapping("/inventory")
     public String inventory(Model model) {
         List<Item> items = inventoryServiceClient.getItems();
@@ -102,15 +126,6 @@ public class PanelController {
         model.addAttribute("cars", cars);
         model.addAttribute("newCar", new Car());
         return "cars";
-    }
-
-    @GetMapping("/workshop_employee_assignment")
-    public String serviceEmployeeAssignment(Model model) {
-        List<User> employees = userServiceClient.getUsers().stream().filter(u -> u.getRole() != Role.CLIENT && u.getRole() != Role.ADMIN).toList();
-        List<Workshop> workshops = workshopServiceClient.getWorkshops();
-        model.addAttribute("employees", employees);
-        model.addAttribute("workshops", workshops);
-        return "workshop_employee_assignment";
     }
 
     @GetMapping("/commissions")
@@ -201,7 +216,10 @@ public class PanelController {
             userServiceClient.addUser(employee);
         }
 
-        return "redirect:/workshop_employee_assignment";
+        if (workshop == null) {
+            return "redirect:/workshops";
+        }
+        return "redirect:/workshop/" + workshopId;
     }
 
     @PostMapping("/commissions")
