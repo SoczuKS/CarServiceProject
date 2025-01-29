@@ -23,7 +23,7 @@
             </thead>
             <tbody>
             <tr th:each="workshop : ${workshops}">
-                <td><a th:href="@{/workshop/{id}(id=${workshop.id})}" th:text="${workshop.name}"></a></td>
+                <td><a class="link" th:href="@{/workshop/{id}(id=${workshop.id})}" th:text="${workshop.name}"></a></td>
                 <td th:text="${workshop.address}"></td>
                 <td th:text="${workshop.phone}"></td>
                 <td th:text="${workshop.description}"></td>

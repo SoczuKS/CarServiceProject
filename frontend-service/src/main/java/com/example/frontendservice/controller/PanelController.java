@@ -82,12 +82,7 @@ public class PanelController {
                             if (u.getRole() == Role.ADMIN) {
                                 return false;
                             }
-                            for (User employee : workshop.getEmployees()) {
-                                if (employee.getId() == u.getId()) {
-                                    return false;
-                                }
-                            }
-                            return true;
+                            return u.getWorkshop() == null;
                         })
                         .toList();
         model.addAttribute("workshop", workshop);

@@ -18,7 +18,6 @@
                 <th> Nazwa </th>
                 <th> Opis </th>
                 <th> Koszt </th>
-                <th> Zlecenia </th>
                 <th> Zadania </th>
             </tr>
             </thead>
@@ -28,11 +27,6 @@
                 <td th:text="${service.name}"></td>
                 <td th:text="${service.description}"></td>
                 <td th:text="${#numbers.formatDecimal(service.cost, 1, 2)}"></td>
-                <td>
-                    <ul>
-                        <li th:each="commission : ${service.commissions}" th:text="${commission.id}"></li>
-                    </ul>
-                </td>
                 <td>
                     <ul>
                         <li th:each="task : ${service.tasks}" th:text="${task.name}"></li>

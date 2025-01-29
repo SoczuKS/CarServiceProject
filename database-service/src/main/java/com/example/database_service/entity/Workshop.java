@@ -31,6 +31,5 @@ public class Workshop {
 
     @OneToMany(mappedBy = "workshop")
     @JsonIgnoreProperties({"workshop"})
-    @JsonManagedReference
     private Set<User> employees;
 }

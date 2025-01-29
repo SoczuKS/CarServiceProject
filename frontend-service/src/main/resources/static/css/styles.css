@@ -118,3 +118,15 @@ form button:hover {
 .hidden {
     display: none;
 }
+
+.horizontal_panel .link {
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+}
+
+.horizontal_panel .link:visited {
+    color: black;
+    font-weight: bold;
+    text-decoration: none;
+}

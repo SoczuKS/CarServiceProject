@@ -52,7 +52,6 @@ public class User {
     @JoinColumn
     @ManyToOne
     @JsonIgnoreProperties({"employees"})
-    @JsonBackReference
     private Workshop workshop;
 
     @OneToMany(mappedBy = "mechanic")
