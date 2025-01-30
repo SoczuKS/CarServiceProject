@@ -11,12 +11,12 @@ public interface DatabaseServiceClient {
     @GetMapping("/services")
     List<Service> getServices();
 
-    @PostMapping("/services")
-    Service addService(@RequestBody Service service);
-
     @GetMapping("/get_service_by_name")
     Service getServiceByName(@RequestParam("name") String name);
 
-    @GetMapping("/get_service_by_id/{id}")
+    @GetMapping("/service/{id}")
     Service getServiceById(@PathVariable("id") int id);
+
+    @PostMapping("/services")
+    Service addService(@RequestBody Service service);
 }

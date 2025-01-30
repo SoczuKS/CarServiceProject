@@ -16,6 +16,6 @@ public interface ServiceServiceClient {
     @PostMapping("/services")
     Service addService(Service service);
 
-    @GetMapping("/get_service_by_id/{id}")
-    Service getServiceById(@PathVariable("id") Integer serviceId);
+    @GetMapping("/service/{id}")
+    Service getServiceById(@PathVariable("id") int serviceId);
 }

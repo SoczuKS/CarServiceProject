@@ -1,11 +1,9 @@
-
 package com.example.schedule_service.service;
 
 import com.example.dto.Commission;
 import com.example.dto.User;
 import com.example.dto.WorkStatus;
-import com.example.schedule_service.client.CommissionServiceClient;
-import com.example.schedule_service.client.UserServiceClient;
+import com.example.schedule_service.service_client.UserServiceClient;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -13,11 +11,9 @@ import java.util.Optional;
 @Service
 public class MechanicAssignmentService {
     private final UserServiceClient userServiceClient;
-    private final CommissionServiceClient commissionServiceClient;
 
-    public MechanicAssignmentService(UserServiceClient userServiceClient, CommissionServiceClient commissionServiceClient) {
+    public MechanicAssignmentService(UserServiceClient userServiceClient) {
         this.userServiceClient = userServiceClient;
-        this.commissionServiceClient = commissionServiceClient;
     }
 
     public Optional<User> findAvailableMechanic(int workshopId) {
@@ -34,11 +30,7 @@ public class MechanicAssignmentService {
         if (mechanic.isPresent()) {
             commission.setMechanic(mechanic.get());
             commission.setStatus(WorkStatus.IN_PROGRESS);
-            commissionServiceClient.addCommission(commission);
-
-            return commission;
-        } else {
-                return commission;
         }
+        return commission;
     }
 }

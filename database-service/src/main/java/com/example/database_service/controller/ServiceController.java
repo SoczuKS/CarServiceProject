@@ -23,18 +23,18 @@ public class ServiceController {
         return serviceRepository.findAll();
     }
 
-    @PostMapping("/services")
-    public Service addService(@RequestBody Service service) {
-        return serviceRepository.save(service);
-    }
-
     @GetMapping("/get_service_by_name")
     public Service getServiceByName(@RequestParam("name") String name) {
         return serviceRepository.findByName(name);
     }
 
-    @GetMapping("/get_service_by_id/{id}")
+    @GetMapping("/service/{id}")
     public Service getServiceById(@PathVariable("id") int id) {
         return serviceRepository.findById(id).orElse(null);
+    }
+
+    @PostMapping("/services")
+    public Service addService(@RequestBody Service service) {
+        return serviceRepository.save(service);
     }
 }

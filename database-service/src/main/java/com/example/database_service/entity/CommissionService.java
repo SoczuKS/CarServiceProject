@@ -25,5 +25,6 @@ public class CommissionService {
     @JsonIgnoreProperties("commissions")
     private Service service;
 
+    @Enumerated(EnumType.STRING)
     private WorkStatus status;
 }

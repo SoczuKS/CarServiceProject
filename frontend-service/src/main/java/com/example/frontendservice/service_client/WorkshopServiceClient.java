@@ -15,11 +15,8 @@ public interface WorkshopServiceClient {
     List<Workshop> getWorkshops();
 
     @GetMapping("/workshop/{id}")
-    Workshop getWorkshopById(@PathVariable("id") Long id);
+    Workshop getWorkshopById(@PathVariable("id") int id);
 
     @PostMapping("/workshops")
     Workshop addService(@RequestBody Workshop workshop);
-
-    @GetMapping("/get_workshop_by_id/{id}")
-    Workshop getWorkshopById(@PathVariable("id") int id);
 }

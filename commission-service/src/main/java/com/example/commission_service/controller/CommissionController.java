@@ -1,6 +1,6 @@
 package com.example.commission_service.controller;
 
-import com.example.commission_service.service.ScheduleServiceClient;
+import com.example.commission_service.service_client.ScheduleServiceClient;
 import com.example.dto.Commission;
 import com.example.commission_service.service_client.DatabaseServiceClient;
 import org.springframework.web.bind.annotation.*;

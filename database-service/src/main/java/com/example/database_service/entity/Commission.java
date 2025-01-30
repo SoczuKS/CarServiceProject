@@ -21,6 +21,7 @@ public class Commission {
     private Set<CommissionService> services;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private WorkStatus status;
 
     @Column(nullable = false)

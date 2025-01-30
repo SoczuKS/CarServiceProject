@@ -1,4 +1,4 @@
-package com.example.schedule_service.client;
+package com.example.schedule_service.service_client;
 
 import com.example.dto.User;
 import org.springframework.cloud.openfeign.FeignClient;

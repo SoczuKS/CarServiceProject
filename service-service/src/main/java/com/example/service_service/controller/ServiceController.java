@@ -19,18 +19,18 @@ public class ServiceController {
         return databaseServiceClient.getServices();
     }
 
-    @PostMapping("/services")
-    public Service addService(@RequestBody Service service) {
-        return databaseServiceClient.addService(service);
-    }
-
     @GetMapping("/get_service_by_name")
     public Service getServiceByName(@RequestParam("name") String name) {
         return databaseServiceClient.getServiceByName(name);
     }
 
-    @GetMapping("/get_service_by_id/{id}")
+    @GetMapping("/service/{id}")
     public Service getServiceById(@PathVariable("id") int id) {
         return databaseServiceClient.getServiceById(id);
+    }
+
+    @PostMapping("/services")
+    public Service addService(@RequestBody Service service) {
+        return databaseServiceClient.addService(service);
     }
 }

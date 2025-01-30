@@ -26,5 +26,4 @@ public class TaskController {
     public Task addTask(@RequestBody Task task) {
         return taskRepository.save(task);
     }
-
 }

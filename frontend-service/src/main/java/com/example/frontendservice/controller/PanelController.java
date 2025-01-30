@@ -69,7 +69,7 @@ public class PanelController {
     }
 
     @GetMapping("/workshop/{id}")
-    public String workshop(Model model, @PathVariable("id") Long id) {
+    public String workshop(Model model, @PathVariable("id") int id) {
         Workshop workshop = workshopServiceClient.getWorkshopById(id);
         List<User> notAssignedEmployees =
                 userServiceClient

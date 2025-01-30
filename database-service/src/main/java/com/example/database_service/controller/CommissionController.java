@@ -22,7 +22,6 @@ public class CommissionController {
 
     @PostMapping("/commissions")
     public Commission addCommission(@RequestBody Commission commission) {
-        //commission.setCommissionedAt(LocalDateTime.now());
         return commissionRepository.save(commission);
     }
 }
