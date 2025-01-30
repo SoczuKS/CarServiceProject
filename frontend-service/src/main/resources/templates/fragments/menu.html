@@ -21,7 +21,7 @@
     <a href="/cars" class="menu_item"
        sec:authorize="hasRole('CLIENT')">Flota</a>
     <a href="/commissions" class="menu_item"
-       sec:authorize="hasRole('ADMIN') or hasRole('MANAGER') or hasRole('MECHANIC') or hasRole('CLIENT')">Zlecenia</a>
+       sec:authorize="hasRole('ADMIN') or hasRole('MANAGER') or hasRole('MECHANIC')">Zlecenia</a>
     <a href="/tasks" class="menu_item"
        sec:authorize="hasRole('ADMIN') or hasRole('MANAGER') or hasRole('MECHANIC')">Zadania</a>
     <a href="/services" class="menu_item"

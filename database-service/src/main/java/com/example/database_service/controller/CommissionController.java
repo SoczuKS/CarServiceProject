@@ -1,6 +1,7 @@
 package com.example.database_service.controller;
 
 import com.example.database_service.entity.Commission;
+import com.example.database_service.entity.CommissionService;
 import com.example.database_service.repository.CommissionRepository;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +23,9 @@ public class CommissionController {
 
     @PostMapping("/commissions")
     public Commission addCommission(@RequestBody Commission commission) {
+        for (CommissionService service : commission.getServices()) {
+            service.setCommission(commission);
+        }
         return commissionRepository.save(commission);
     }
 }

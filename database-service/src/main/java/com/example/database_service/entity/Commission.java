@@ -16,8 +16,8 @@ public class Commission {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @OneToMany(mappedBy = "commission")
-    @JsonIgnoreProperties({"commission"})
+    @OneToMany(mappedBy = "commission", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties(value = {"commission"}, allowSetters = true)
     private Set<CommissionService> services;
 
     @Column(nullable = false)
@@ -31,15 +31,15 @@ public class Commission {
 
     @ManyToOne
     @JoinColumn
-    @JsonIgnoreProperties({"commissions"})
+    @JsonIgnoreProperties(value = {"commissions"}, allowSetters = true)
     private Car car;
 
     @ManyToOne
-    @JsonIgnoreProperties({"employees"})
+    @JsonIgnoreProperties(value = {"employees"}, allowSetters = true)
     private Workshop workshop;
 
     @ManyToOne
-    @JsonIgnoreProperties({"commissions"})
+    @JsonIgnoreProperties(value = {"commissions"}, allowSetters = true)
     private User mechanic;
 
     @PrePersist

@@ -1,8 +1,6 @@
 package com.example.database_service.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,8 +24,8 @@ public class Service {
     @Column(nullable = false)
     private float cost;
 
-    @OneToMany(mappedBy = "service")
-    @JsonIgnoreProperties({"services"})
+    @OneToMany(mappedBy = "service", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties(value = {"services"}, allowSetters = true)
     private Set<CommissionService> commissions;
 
     @ManyToMany
@@ -36,7 +34,7 @@ public class Service {
             joinColumns = @JoinColumn(name = "service_id"),
             inverseJoinColumns = @JoinColumn(name = "task_id")
     )
-    @JsonIgnoreProperties({"services"})
+    @JsonIgnoreProperties(value = {"services"}, allowSetters = true)
     private Set<Task> tasks;
 
     @PrePersist

@@ -1,8 +1,6 @@
 package com.example.database_service.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -46,16 +44,16 @@ public class User {
     private String TIN;
 
     @OneToMany(mappedBy = "owner")
-    @JsonIgnoreProperties({"owner"})
+    @JsonIgnoreProperties(value = {"owner"}, allowSetters = true)
     private Set<Car> cars;
 
     @JoinColumn
     @ManyToOne
-    @JsonIgnoreProperties({"employees"})
+    @JsonIgnoreProperties(value = {"employees"}, allowSetters = true)
     private Workshop workshop;
 
     @OneToMany(mappedBy = "mechanic")
-    @JsonIgnoreProperties({"mechanic"})
+    @JsonIgnoreProperties(value = {"mechanic"}, allowSetters = true)
     private Set<Commission> commissions;
 
     @PrePersist

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="pl">
+<html xmlns:th="http://www.thymeleaf.org" lang="pl">
 <head>
     <title>CarService</title>
     <meta charset="UTF-8">
@@ -30,7 +30,27 @@
             </figure>
         </div>
         <div class="vertical_panel form_panel">
-
+            <h3>Złóż zlecenie</h3>
+            <form th:action="@{/commissions}" th:object="${newCommission}" method="post">
+                <input type="hidden" id="car" name="carId" th:value="${car.id}"/>
+                <div>
+                    <label for="services">Usługi:</label>
+                    <select id="services" name="serviceIds" multiple>
+                        <option th:each="service: ${services}"
+                                th:value="${service.id}" th:text="${service.name}"></option>
+                    </select>
+                </div>
+                <div>
+                    <label for="workshop">Serwis:</label>
+                    <select id="workshop" name="workshopId" required>
+                        <option th:each="workshop : ${workshops}"
+                                th:value="${workshop.id}" th:text="${workshop.name}"></option>
+                    </select>
+                </div>
+                <div>
+                    <button type="submit">Dodaj</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

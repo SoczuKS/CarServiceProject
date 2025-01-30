@@ -24,13 +24,13 @@ public class Car {
 
     @JoinColumn(nullable = false)
     @ManyToOne
-    @JsonIgnoreProperties({"cars"})
+    @JsonIgnoreProperties(value = {"cars"}, allowSetters = true)
     private User owner;
 
     @Column(nullable = false)
     private int year;
 
     @OneToMany(mappedBy = "car")
-    @JsonIgnoreProperties({"car"})
+    @JsonIgnoreProperties(value = {"car"}, allowSetters = true)
     private Set<Commission> commissions;
 }

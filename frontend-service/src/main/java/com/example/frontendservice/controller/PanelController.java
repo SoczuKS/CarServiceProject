@@ -126,22 +126,20 @@ public class PanelController {
     @GetMapping("/car/{id}")
     public String car(Model model, @PathVariable("id") int id) {
         Car car = carServiceClient.getCarById(id);
+        List<Service> services = serviceServiceClient.getServices();
+        List<Workshop> workshops = workshopServiceClient.getWorkshops();
         model.addAttribute("car", car);
+        model.addAttribute("services", services);
+        model.addAttribute("workshops", workshops);
+        model.addAttribute("newCommission", new Commission());
         return "car";
     }
 
     @GetMapping("/commissions")
     public String commissions(Model model) {
-        List<Service> services = serviceServiceClient.getServices();
-        List<Car> cars = carServiceClient.getAllCars();
-        List<Workshop> workshops = workshopServiceClient.getWorkshops();
         List<Commission> commissions = commissionServiceClient.getCommissions();
-        model.addAttribute("services", services);
-        model.addAttribute("cars", cars);
-        model.addAttribute("workshops", workshops);
         model.addAttribute("commissions", commissions);
         model.addAttribute("workStatuses", WorkStatus.values());
-        model.addAttribute("newCommission", new Commission());
         return "commissions";
     }
 
@@ -236,21 +234,17 @@ public class PanelController {
                 .map(serviceServiceClient::getServiceById)
                 .toList();
         Set<CommissionService> commissionServices = services.stream()
-                .map(service ->
-                {var x = new CommissionService();
-                    x.setService(service);
-                    x.setStatus(commission.getStatus());
-                    //x.setCommission(commission);
-                    /*var y=new Commission();
-                    y.setId(commission.getId());
-                    x.setCommission(y);*/
-                    return x;
+                .map(service -> {
+                    CommissionService commissionService = new CommissionService();
+                    commissionService.setService(service);
+                    commissionService.setStatus(commission.getStatus());
+                    return commissionService;
                 })
                 .collect(Collectors.toSet());
         commission.setServices(commissionServices);
 
         commissionServiceClient.addCommission(commission);
-        return "redirect:/commissions";
+        return "redirect:/car/" + carId;
     }
 
     @PostMapping("/tasks")

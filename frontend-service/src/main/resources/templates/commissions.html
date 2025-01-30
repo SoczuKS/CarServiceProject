@@ -37,41 +37,6 @@
             </tr>
             </tbody>
         </table>
-        <div class="label_div">
-            <h3>Dodaj nowe zlecenie</h3>
-            <form th:action="@{/commissions}" th:object="${newCommission} " method="post">
-                <div>
-                    <label for="services">Usługi:</label>
-                    <select id="services" name="serviceIds" multiple>
-                        <option value="" disabled>Select services</option>
-                        <th:block th:each="service : ${services}">
-                            <option th:value="${service.id}" th:text="${service.name}"></option>
-                        </th:block>
-                    </select>
-                </div>
-                <div>
-                    <label for="car">Samochód:</label>
-                    <select id="car" name="carId" required>
-                        <option value="" disabled>Select car</option>
-                        <th:block th:each="car : ${cars}">
-                            <option th:value="${car.id}" th:text="${car.brand}"></option>
-                        </th:block>
-                    </select>
-                </div>
-                <div>
-                    <label for="workshop">Serwis:</label>
-                    <select id="workshop" name="workshopId" required>
-                        <option value="" disabled>Select workshop</option>
-                        <th:block th:each="workshop : ${workshops}">
-                            <option th:value="${workshop.id}" th:text="${workshop.name}"></option>
-                        </th:block>
-                    </select>
-                </div>
-                <div>
-                    <button type="submit">Dodaj</button>
-                </div>
-            </form>
-        </div>
     </div>
 </div>
 </body>

@@ -1,7 +1,6 @@
 package com.example.database_service.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -30,6 +29,6 @@ public class Workshop {
     private String description;
 
     @OneToMany(mappedBy = "workshop")
-    @JsonIgnoreProperties({"workshop"})
+    @JsonIgnoreProperties(value = {"workshop"}, allowSetters = true)
     private Set<User> employees;
 }

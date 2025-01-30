@@ -10,17 +10,16 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CommissionService {
-    @EmbeddedId
-    private CommissionServiceId id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
 
     @ManyToOne
-    @MapsId("commissionId")
     @JoinColumn(name = "commission_id")
     @JsonIgnoreProperties("services")
     private Commission commission;
 
     @ManyToOne
-    @MapsId("serviceId")
     @JoinColumn(name = "service_id")
     @JsonIgnoreProperties("commissions")
     private Service service;
