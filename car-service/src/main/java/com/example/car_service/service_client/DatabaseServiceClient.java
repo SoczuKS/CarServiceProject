@@ -15,6 +15,9 @@ public interface DatabaseServiceClient {
     @GetMapping("/cars")
     List<Car> getCars();
 
+    @GetMapping("/car/{id}")
+    Car getCarById(@PathVariable("id") int id);
+
     @PostMapping("/cars")
     Car addCar(@RequestBody Car car);
 

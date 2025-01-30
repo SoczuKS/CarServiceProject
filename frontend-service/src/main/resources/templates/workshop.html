@@ -31,10 +31,7 @@
                         <option th:each="employee : ${notAssignedEmployees}" th:value="${employee.id}" th:text="${employee.firstName} + ' ' + ${employee.lastName}"></option>
                     </select>
                 </div>
-                <div class="hidden">
-                    <label for="workshop">Serwis:</label>
-                    <input type="number" id="workshop" name="workshopId" th:value="${workshop.id}" required>
-                </div>
+                <input type="hidden" id="workshop" name="workshopId" th:value="${workshop.id}" required>
                 <button type="submit">Przypisz</button>
             </form>
         </div>

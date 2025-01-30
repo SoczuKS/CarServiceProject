@@ -18,9 +18,9 @@ public interface CarServiceClient {
     @PostMapping("/cars")
     Car addCar(@RequestBody Car car);
 
+    @GetMapping("/car/{id}")
+    Car getCarById(@PathVariable("id") int id);
+
     @PostMapping("/get_cars_by_owner")
     List<Car> getCarsByOwner(@RequestBody User owner);
-
-    @GetMapping("/get_car_by_id/{id}")
-    Car getCarById(@PathVariable("id") int id);
 }

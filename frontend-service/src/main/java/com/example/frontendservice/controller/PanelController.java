@@ -123,6 +123,13 @@ public class PanelController {
         return "cars";
     }
 
+    @GetMapping("/car/{id}")
+    public String car(Model model, @PathVariable("id") int id) {
+        Car car = carServiceClient.getCarById(id);
+        model.addAttribute("car", car);
+        return "car";
+    }
+
     @GetMapping("/commissions")
     public String commissions(Model model) {
         List<Service> services = serviceServiceClient.getServices();

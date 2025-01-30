@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="pl">
+<head>
+    <title>CarService</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css"/>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+</head>
+<body>
+<div id="menu" th:insert="~{fragments/menu :: body}"></div>
+<div id="content">
+    <div class="horizontal_panel">
+        <div class="vertical_panel">
+            <p th:text="|Marka: ${car.brand}|"></p>
+            <p th:text="|Model: ${car.model}|"></p>
+            <p th:text="|Rok produkcji: ${car.year}|"></p>
+            <figure>
+                <figcaption>Historia zleceń</figcaption>
+                <ul>
+                    <li th:each="commission : ${car.commissions}">
+                        <p th:text="|Data zlecenia: ${commission.commissionedAt}|"></p>
+                        <p th:text="|Data ukończenia: ${commission.finishedAt}|"></p>
+                        <p th:text="|Status: ${commission.status}|"></p>
+                        <ul>
+                            <li th:each="service : ${commission.services}"
+                                th:text="|${service.service.name} ${service.service.cost}|"></li>
+                        </ul>
+                    </li>
+                </ul>
+            </figure>
+        </div>
+        <div class="vertical_panel" sec:authorize="hasRole('ADMIN') or hasRole('MANAGER')">
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

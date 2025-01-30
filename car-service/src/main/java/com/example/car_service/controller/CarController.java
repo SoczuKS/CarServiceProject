@@ -20,6 +20,11 @@ public class CarController {
         return databaseServiceClient.getCars();
     }
 
+    @GetMapping("/car/{id}")
+    public Car getCarById(@PathVariable("id") int id) {
+        return databaseServiceClient.getCarById(id);
+    }
+
     @PostMapping("/cars")
     public Car addCar(@RequestBody Car car) {
         return databaseServiceClient.addCar(car);

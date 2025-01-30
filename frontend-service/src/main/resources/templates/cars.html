@@ -21,7 +21,7 @@
             </thead>
             <tbody>
             <tr th:each="car : ${cars}">
-                <td th:text="${car.brand}"></td>
+                <td><a class="link" th:href="@{/car/{id}(id=${car.id})}" th:text="${car.brand}"></a></td>
                 <td th:text="${car.model}"></td>
                 <td th:text="${car.year}"></td>
             </tr>

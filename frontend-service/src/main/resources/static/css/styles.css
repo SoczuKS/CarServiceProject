@@ -115,10 +115,6 @@ form button:hover {
     margin-left: 10px;
 }
 
-.hidden {
-    display: none;
-}
-
 .horizontal_panel .link {
     font-weight: bold;
     text-decoration: none;
