@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="pl">
+<html xmlns:th="http://www.thymeleaf.org" lang="pl">
 <head>
     <title>CarService</title>
     <meta charset="UTF-8">
@@ -31,7 +31,7 @@
             </tr>
             </tbody>
         </table>
-        <div>
+        <div class="form_panel">
             <h2>Dodaj klienta</h2>
             <form th:action="@{/add_company_client}" th:object="${newCompanyClient}" method="post">
                 <div>

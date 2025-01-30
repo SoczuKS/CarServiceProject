@@ -22,13 +22,14 @@
                 </li>
             </ul>
         </div>
-        <div class="vertical_panel" sec:authorize="hasRole('ADMIN') or hasRole('MANAGER')">
+        <div class="vertical_panel form_panel" sec:authorize="hasRole('ADMIN') or hasRole('MANAGER')">
             <h2>Przypisz pracownika</h2>
             <form th:action="@{/workshop_employee_assignment}" method="post">
                 <div>
                     <label for="user">Użytkownik:</label>
                     <select id="user" name="employeeId" required>
-                        <option th:each="employee : ${notAssignedEmployees}" th:value="${employee.id}" th:text="${employee.firstName} + ' ' + ${employee.lastName}"></option>
+                        <option th:each="employee : ${notAssignedEmployees}" th:value="${employee.id}"
+                                th:text="${employee.firstName} + ' ' + ${employee.lastName}"></option>
                     </select>
                 </div>
                 <input type="hidden" id="workshop" name="workshopId" th:value="${workshop.id}" required>

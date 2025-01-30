@@ -14,11 +14,11 @@
         <table>
             <thead>
             <tr>
-                <th> Id </th>
-                <th> Nazwa </th>
-                <th> Opis </th>
-                <th> Koszt </th>
-                <th> Zadania </th>
+                <th>Id</th>
+                <th>Nazwa</th>
+                <th>Opis</th>
+                <th>Koszt</th>
+                <th>Zadania</th>
             </tr>
             </thead>
             <tbody>
@@ -35,7 +35,7 @@
             </tr>
             </tbody>
         </table>
-        <div sec:authorize="hasRole('ADMIN') or hasRole('MANAGER') or hasRole('MECHANIC')">
+        <div sec:authorize="hasRole('ADMIN') or hasRole('MANAGER') or hasRole('MECHANIC')" class="form_panel">
             <h3>Dodaj nową usługę</h3>
             <form th:action="@{/services}" method="post" th:object="${newService}">
                 <div>
@@ -57,6 +57,6 @@
                 </div>
             </form>
         </div>
-</div>
+    </div>
 </body>
 </html>

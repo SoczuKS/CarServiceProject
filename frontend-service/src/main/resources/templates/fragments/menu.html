@@ -13,14 +13,16 @@
     <a href="/inventory" class="menu_item"
        sec:authorize="hasRole('ADMIN') or hasRole('MANAGER') or hasRole('ACCOUNTANT')">Magazyn</a>
     <a href="/individual_clients" class="menu_item"
-       sec:authorize="hasRole('ADMIN') or hasRole('MANAGER') or hasRole('ACCOUNTANT') or hasRole('MECHANIC')">Klienci indywidualni</a>
+       sec:authorize="hasRole('ADMIN') or hasRole('MANAGER') or hasRole('ACCOUNTANT') or hasRole('MECHANIC')">
+        Klienci indywidualni</a>
     <a href="/company_clients" class="menu_item"
-       sec:authorize="hasRole('ADMIN') or hasRole('MANAGER') or hasRole('ACCOUNTANT') or hasRole('MECHANIC')">Klienci biznesowi</a>
+       sec:authorize="hasRole('ADMIN') or hasRole('MANAGER') or hasRole('ACCOUNTANT') or hasRole('MECHANIC')">
+        Klienci biznesowi</a>
     <a href="/cars" class="menu_item"
        sec:authorize="hasRole('CLIENT')">Flota</a>
     <a href="/commissions" class="menu_item"
        sec:authorize="hasRole('ADMIN') or hasRole('MANAGER') or hasRole('MECHANIC') or hasRole('CLIENT')">Zlecenia</a>
-    <a href ="/tasks" class="menu_item"
+    <a href="/tasks" class="menu_item"
        sec:authorize="hasRole('ADMIN') or hasRole('MANAGER') or hasRole('MECHANIC')">Zadania</a>
     <a href="/services" class="menu_item"
        sec:authorize="hasRole('ADMIN') or hasRole('MANAGER') or hasRole('MECHANIC') or hasRole('CLIENT')">Usługi</a>

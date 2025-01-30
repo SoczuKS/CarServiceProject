@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="pl">
+<html xmlns:th="http://www.thymeleaf.org" lang="pl">
 <head>
     <title>CarService</title>
     <meta charset="UTF-8">
@@ -26,7 +26,7 @@
                 <td th:text="${car.year}"></td>
             </tr>
         </table>
-        <div>
+        <div class="form_panel">
             <h2>Dodaj pojazd</h2>
             <form th:action="@{/add_car}" th:object="${newCar}" method="post">
                 <div>
@@ -39,7 +39,8 @@
                 </div>
                 <div>
                     <label for="year">Rok produkcji:</label>
-                    <input type="number" id="year" name="year" value="2010" min="1900" max="2025" required th:field="*{year}">
+                    <input type="number" id="year" name="year" th:field="*{year}"
+                           value="2010" min="1900" max="2025" required>
                 </div>
                 <button type="submit">Dodaj pojazd</button>
             </form>
