@@ -15,11 +15,11 @@ public interface CarServiceClient {
     @GetMapping("/cars")
     List<Car> getAllCars();
 
-    @PostMapping("/cars")
-    Car addCar(@RequestBody Car car);
-
     @GetMapping("/car/{id}")
     Car getCarById(@PathVariable("id") int id);
+
+    @PostMapping("/cars")
+    Car addCar(@RequestBody Car car);
 
     @PostMapping("/get_cars_by_owner")
     List<Car> getCarsByOwner(@RequestBody User owner);

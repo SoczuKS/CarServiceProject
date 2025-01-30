@@ -23,7 +23,4 @@ public interface DatabaseServiceClient {
 
     @PostMapping("/get_cars_by_owner")
     List<Car> getCarsByOwner(@RequestBody User owner);
-
-    @GetMapping("/get_car_by_id/{id}")
-    Car getCarById(@PathVariable("id") int id);
 }

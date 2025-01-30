@@ -34,9 +34,4 @@ public class CarController {
     public List<Car> getCarsByOwner(@RequestBody User owner) {
         return databaseServiceClient.getCarsByOwner(owner);
     }
-
-    @GetMapping("/get_car_by_id/{id}")
-    public Car getCarById(@PathVariable int id) {
-        return databaseServiceClient.getCarById(id);
-    }
 }
