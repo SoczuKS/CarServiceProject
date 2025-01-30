@@ -13,5 +13,5 @@ public interface TaskServiceClient {
     List<Task> getTasks();
 
     @PostMapping("/tasks")
-    void addTask(Task task);
+    Task addTask(Task task);
 }

@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Controller
 public class PanelController {
@@ -26,6 +28,7 @@ public class PanelController {
     private final TaskServiceClient taskServiceClient;
     private final ServiceServiceClient serviceServiceClient;
     private final HttpSession httpSession;
+
 
     public PanelController(
             UserServiceClient userServiceClient,
@@ -202,7 +205,30 @@ public class PanelController {
     }
 
     @PostMapping("/commissions")
-    public String addCommission(@ModelAttribute Commission commission) {
+    public String addCommission(@ModelAttribute Commission commission, @RequestParam("carId") Integer carId, @RequestParam("workshopId") Integer workshopId, @RequestParam("serviceIds") List<Integer> serviceIds) {
+        Car car = carServiceClient.getCarById(carId);
+        Workshop workshop = workshopServiceClient.getWorkshopById(workshopId);
+
+        commission.setCar(car);
+        commission.setWorkshop(workshop);
+        commission.setStatus(WorkStatus.NOT_STARTED);
+        List<Service> services = serviceIds.stream()
+                .map(serviceServiceClient::getServiceById)
+                .toList();
+        Set<CommissionService> commissionServices = services.stream()
+                .map(service ->
+                {var x = new CommissionService();
+                    x.setService(service);
+                    x.setStatus(commission.getStatus());
+                    //x.setCommission(commission);
+                    /*var y=new Commission();
+                    y.setId(commission.getId());
+                    x.setCommission(y);*/
+                    return x;
+                })
+                .collect(Collectors.toSet());
+        commission.setServices(commissionServices);
+
         commissionServiceClient.addCommission(commission);
         return "redirect:/commissions";
     }

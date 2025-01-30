@@ -1,5 +1,6 @@
 package com.example.database_service.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -14,7 +15,7 @@ import java.util.Set;
 public class Workshop {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     @Column(nullable = false)
     private String name;
@@ -28,7 +29,7 @@ public class Workshop {
     @Column(nullable = false)
     private String description;
 
-    @OneToMany(mappedBy = "workshop", fetch = FetchType.LAZY)
-    @JsonManagedReference
+    @OneToMany(mappedBy = "workshop")
+    @JsonIgnoreProperties({"workshop"})
     private Set<User> employees;
 }

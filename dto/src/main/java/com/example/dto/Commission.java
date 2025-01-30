@@ -16,4 +16,5 @@ public class Commission {
     private LocalDateTime finishedAt;
     private Car car;
     private Workshop workshop;
+    private User mechanic;
 }

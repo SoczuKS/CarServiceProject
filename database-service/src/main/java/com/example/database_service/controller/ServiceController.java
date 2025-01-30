@@ -32,4 +32,9 @@ public class ServiceController {
     public Service getServiceByName(@RequestParam("name") String name) {
         return serviceRepository.findByName(name);
     }
+
+    @GetMapping("/get_service_by_id/{id}")
+    public Service getServiceById(@PathVariable("id") int id) {
+        return serviceRepository.findById(id).orElse(null);
+    }
 }

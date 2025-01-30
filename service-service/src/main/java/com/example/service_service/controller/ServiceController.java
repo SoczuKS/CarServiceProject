@@ -28,4 +28,9 @@ public class ServiceController {
     public Service getServiceByName(@RequestParam("name") String name) {
         return databaseServiceClient.getServiceByName(name);
     }
+
+    @GetMapping("/get_service_by_id/{id}")
+    public Service getServiceById(@PathVariable("id") int id) {
+        return databaseServiceClient.getServiceById(id);
+    }
 }

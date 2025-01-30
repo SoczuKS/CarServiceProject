@@ -14,7 +14,6 @@
         <table>
             <thead>
             <tr>
-                <th> Id </th>
                 <th> Usługi </th>
                 <th> Status </th>
                 <th> Data zlecenia </th>
@@ -25,7 +24,6 @@
             </thead>
             <tbody>
             <tr th:each="commission : ${commissions}">
-                <td th:text="${commission.id}"></td>
                 <td>
                     <ul>
                         <li th:each="service : ${commission.services}" th:text="${service.service.name}"></li>
@@ -34,14 +32,14 @@
                 <td th:text="${commission.status}"></td>
                 <td th:text="${commission.commissionedAt}"></td>
                 <td th:text="${commission.finishedAt}"></td>
-                <td th:text="${commission.car}"></td>
-                <td th:text="${commission.workshop}"></td>
+                <td th:text="|${commission.car.brand} ${commission.car.model}|"></td>
+                <td th:text="${commission.workshop.name}"></td>
             </tr>
             </tbody>
         </table>
         <div class="label_div">
         <h3>Dodaj nowe zlecenie</h3>
-            <form th:action="@{/commissions}" method="post">
+            <form th:action="@{/commissions}" th:object="${newCommission} " method="post">
                 <div>
                     <label for="services">Usługi:</label>
                     <select id="services" name="serviceIds" multiple>
@@ -50,22 +48,6 @@
                             <option th:value="${service.id}" th:text="${service.name}"></option>
                         </th:block>
                     </select>
-                </div>
-                <div>
-                    <label for="status">Status:</label>
-                    <select id="status" name="status" required>
-                        <th:block th:each="status : ${workStatuses}">
-                            <option th:value="${status}" th:text="${status.name()}"></option>
-                        </th:block>
-                    </select>
-                </div>
-                <div>
-                    <label for="commissionedAt">Data zlecenia:</label>
-                    <input type="datetime-local" id="commissionedAt" name="commissionedAt" th:value="${#calendars.format(#calendars.createNow(), 'dd MMM yyyy HH:mm')}" required>
-                </div>
-                <div>
-                    <label for="finishedAt">Data ukończenia:</label>
-                    <input type="date" id="finishedAt" name="finishedAt">
                 </div>
                 <div>
                     <label for="car">Samochód:</label>

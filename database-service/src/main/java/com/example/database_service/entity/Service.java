@@ -1,6 +1,7 @@
 package com.example.database_service.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -26,6 +27,7 @@ public class Service {
     private float cost;
 
     @OneToMany(mappedBy = "service")
+    @JsonIgnoreProperties({"services"})
     private Set<CommissionService> commissions;
 
     @ManyToMany
@@ -34,7 +36,7 @@ public class Service {
             joinColumns = @JoinColumn(name = "service_id"),
             inverseJoinColumns = @JoinColumn(name = "task_id")
     )
-    @JsonBackReference
+    @JsonIgnoreProperties({"services"})
     private Set<Task> tasks;
 
     @PrePersist

@@ -3,10 +3,7 @@ package com.example.database_service.controller;
 import com.example.database_service.entity.Car;
 import com.example.database_service.entity.User;
 import com.example.database_service.repository.CarRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,5 +28,10 @@ public class CarController {
     @PostMapping("/get_cars_by_owner")
     public List<Car> getCarsByUser(@RequestBody User owner) {
         return carRepository.findByOwner(owner);
+    }
+
+    @GetMapping("/get_car_by_id/{id}")
+    public Car getCarById(@PathVariable("id") int id) {
+        return carRepository.findById(id).orElse(null);
     }
 }

@@ -2,10 +2,7 @@ package com.example.database_service.controller;
 
 import com.example.database_service.entity.Workshop;
 import com.example.database_service.repository.WorkshopRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,5 +22,10 @@ public class WorkshopController {
     @PostMapping("/workshops")
     public Workshop addService(@RequestBody Workshop workshop) {
         return workshopRepository.save(workshop);
+    }
+
+    @GetMapping("/get_workshop_by_id/{id}")
+    public Workshop getServiceById(@PathVariable("id") int id) {
+        return workshopRepository.findById(id).orElse(null);
     }
 }

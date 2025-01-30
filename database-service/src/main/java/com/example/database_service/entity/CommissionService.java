@@ -1,5 +1,6 @@
 package com.example.database_service.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,11 +16,13 @@ public class CommissionService {
     @ManyToOne
     @MapsId("commissionId")
     @JoinColumn(name = "commission_id")
+    @JsonIgnoreProperties("services")
     private Commission commission;
 
     @ManyToOne
     @MapsId("serviceId")
     @JoinColumn(name = "service_id")
+    @JsonIgnoreProperties("commissions")
     private Service service;
 
     private WorkStatus status;

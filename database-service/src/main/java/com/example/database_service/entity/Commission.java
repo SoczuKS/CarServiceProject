@@ -1,5 +1,6 @@
 package com.example.database_service.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,6 +17,7 @@ public class Commission {
     private int id;
 
     @OneToMany(mappedBy = "commission")
+    @JsonIgnoreProperties({"commission"})
     private Set<CommissionService> services;
 
     @Column(nullable = false)
@@ -27,8 +29,20 @@ public class Commission {
     private LocalDateTime finishedAt;
 
     @ManyToOne
+    @JoinColumn
+    @JsonIgnoreProperties({"commissions"})
     private Car car;
 
     @ManyToOne
+    @JsonIgnoreProperties({"employees"})
     private Workshop workshop;
+
+    @ManyToOne
+    @JsonIgnoreProperties({"commissions"})
+    private User mechanic;
+
+    @PrePersist
+    protected void onCreate() {
+        this.commissionedAt = LocalDateTime.now();
+    }
 }

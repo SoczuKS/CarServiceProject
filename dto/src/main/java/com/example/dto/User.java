@@ -21,4 +21,6 @@ public class User {
     private String TIN;
     private Set<Car> cars;
     private Workshop workshop;
+    private Set<Commission> commissions;
+
 }

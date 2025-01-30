@@ -1,6 +1,7 @@
 package com.example.database_service.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -44,14 +45,18 @@ public class User {
 
     private String TIN;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "owner")
-    @JsonManagedReference
+    @OneToMany(mappedBy = "owner")
+    @JsonIgnoreProperties({"owner"})
     private Set<Car> cars;
 
     @JoinColumn
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonBackReference
+    @ManyToOne
+    @JsonIgnoreProperties({"employees"})
     private Workshop workshop;
+
+    @OneToMany(mappedBy = "mechanic")
+    @JsonIgnoreProperties({"mechanic"})
+    private Set<Commission> commissions;
 
     @PrePersist
     protected void onCreate() {

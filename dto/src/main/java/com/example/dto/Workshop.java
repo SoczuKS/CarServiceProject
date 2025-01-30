@@ -8,7 +8,7 @@ import java.util.Set;
 @Getter
 @Setter
 public class Workshop {
-    private Long id;
+    private int id;
     private String name;
     private String address;
     private String phone;

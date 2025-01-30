@@ -21,7 +21,7 @@
     <a href="/workshop_employee_assignment" class="menu_item"
             sec:authorize="hasRole('ADMIN') or hasRole('MANAGER')">Przypisanie pracownika do serwisu</a>
     <a href="/commissions" class="menu_item"
-            sec:authorize="hasRole('ADMIN') or hasRole('MANAGER') or hasRole('MECHANIC')">Zlecenia</a>
+            sec:authorize="hasRole('ADMIN') or hasRole('MANAGER') or hasRole('MECHANIC') or hasRole('CLIENT')">Zlecenia</a>
     <a href ="/tasks" class="menu_item"
             sec:authorize="hasRole('ADMIN') or hasRole('MANAGER') or hasRole('MECHANIC')">Zadania</a>
     <a href="/services" class="menu_item"
