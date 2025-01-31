@@ -27,11 +27,7 @@ public class CommissionController {
 
     @PostMapping("/commissions")
     public Commission addCommission(@RequestBody Commission commission) {
-        return databaseServiceClient.addCommission(commission);
-    }
-
-    @PostMapping("/schedule")
-    public Commission forwardCommission(@RequestBody Commission commission) {
-        return scheduleServiceClient.forwardCommission(commission);
+        Commission scheduledCommission = scheduleServiceClient.schedule(commission);
+        return databaseServiceClient.addCommission(scheduledCommission);
     }
 }

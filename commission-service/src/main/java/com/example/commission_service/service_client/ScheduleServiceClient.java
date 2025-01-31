@@ -8,5 +8,5 @@ import org.springframework.web.bind.annotation.RequestBody;
 @FeignClient(name = "schedule-service")
 public interface ScheduleServiceClient {
     @PostMapping("/schedule")
-    Commission forwardCommission(@RequestBody Commission commission);
+    Commission schedule(@RequestBody Commission commission);
 }
