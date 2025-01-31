@@ -13,9 +13,9 @@ public interface ServiceServiceClient {
     @GetMapping("/services")
     List<Service> getServices();
 
-    @PostMapping("/services")
-    Service addService(Service service);
-
     @GetMapping("/service/{id}")
     Service getServiceById(@PathVariable("id") int serviceId);
+
+    @PostMapping("/services")
+    Service addService(Service service);
 }

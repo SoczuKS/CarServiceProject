@@ -14,9 +14,9 @@ public interface DatabaseServiceClient {
     @GetMapping("/users")
     List<User> getUsers();
 
-    @PostMapping("/users")
-    User addUser(@RequestBody User user);
-
     @GetMapping("/get_user_by_email")
     User getUserByEmail(@RequestParam("email") String email);
+
+    @PostMapping("/users")
+    User addUser(@RequestBody User user);
 }

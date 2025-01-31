@@ -1,7 +1,7 @@
 package com.example.task_service.controller;
 
-import com.example.task_service.service_client.DatabaseServiceClient;
 import com.example.dto.Task;
+import com.example.task_service.service_client.DatabaseServiceClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -25,7 +24,6 @@ public class PanelController {
     private final TaskServiceClient taskServiceClient;
     private final ServiceServiceClient serviceServiceClient;
     private final HttpSession httpSession;
-
 
     public PanelController(
             UserServiceClient userServiceClient,

@@ -19,13 +19,13 @@ public class UserController {
         return databaseServiceClient.getUsers();
     }
 
-    @PostMapping("/users")
-    public User addUser(@RequestBody User user) {
-        return databaseServiceClient.addUser(user);
-    }
-
     @GetMapping("/get_user_by_email")
     public User getUserByEmail(@RequestParam("email") String email) {
         return databaseServiceClient.getUserByEmail(email);
+    }
+
+    @PostMapping("/users")
+    public User addUser(@RequestBody User user) {
+        return databaseServiceClient.addUser(user);
     }
 }

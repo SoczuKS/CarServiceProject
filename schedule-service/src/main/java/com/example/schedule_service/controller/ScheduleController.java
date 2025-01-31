@@ -1,10 +1,10 @@
 package com.example.schedule_service.controller;
 
+import com.example.dto.Commission;
 import com.example.schedule_service.service.MechanicAssignmentService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import com.example.dto.Commission;
 
 @RestController
 public class ScheduleController {

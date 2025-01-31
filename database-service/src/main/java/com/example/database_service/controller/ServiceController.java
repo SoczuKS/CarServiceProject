@@ -1,14 +1,10 @@
 package com.example.database_service.controller;
 
 import com.example.database_service.entity.Service;
-import com.example.database_service.entity.Task;
 import com.example.database_service.repository.ServiceRepository;
-import com.example.database_service.repository.TaskRepository;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @RestController
 public class ServiceController {
