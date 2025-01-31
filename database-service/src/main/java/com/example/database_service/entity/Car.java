@@ -10,7 +10,9 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "cars")
+@Table(name = "cars", indexes = {
+        @Index(name = "brand_model", columnList = "brand, model")
+})
 public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

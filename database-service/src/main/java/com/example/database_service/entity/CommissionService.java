@@ -6,7 +6,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "commission_services")
+@Table(name = "commission_services", uniqueConstraints = {
+        @UniqueConstraint(name = "commission_service", columnNames = {"commission_id", "service_id"})
+})
 @Getter
 @Setter
 public class CommissionService {

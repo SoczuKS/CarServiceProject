@@ -11,7 +11,15 @@ import java.util.Set;
 @Setter
 @Getter
 @Entity
-@Table(name = "users")
+@Table(
+        name = "users",
+        indexes = {
+                @Index(name = "email", columnList = "email"),
+                @Index(name = "role", columnList = "role")
+        },
+        uniqueConstraints = {
+                @UniqueConstraint(name = "email", columnNames = {"email"})
+        })
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
