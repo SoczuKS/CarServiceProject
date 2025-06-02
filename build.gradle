@@ -2,7 +2,7 @@ plugins {
 	id 'java'
 	id 'io.spring.dependency-management' version '1.1.7'
 	id 'io.freefair.lombok' version '8.12'
-	id 'org.springframework.boot' version '3.4.2'
+	id 'com.gradleup.shadow' version "8.3.6"
 }
 
 group = 'com.example'
@@ -24,14 +24,15 @@ subprojects {
 	apply plugin: 'java'
 	apply plugin: 'io.spring.dependency-management'
 	apply plugin: 'io.freefair.lombok'
-	apply plugin: 'org.springframework.boot'
 
 	dependencies {
-		implementation 'org.springframework.boot:spring-boot-starter'
+		if(project.name != 'dto') {
+			implementation 'org.springframework.boot:spring-boot-starter'
+			testImplementation 'org.springframework.boot:spring-boot-starter-test'
+		}
 		implementation 'org.projectlombok:lombok'
 		testImplementation platform('org.junit:junit-bom:5.10.0')
 		testImplementation 'org.junit.jupiter:junit-jupiter'
-		testImplementation 'org.springframework.boot:spring-boot-starter-test'
 		testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 	}
 

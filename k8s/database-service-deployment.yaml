@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: database-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: database-service
+  template:
+    metadata:
+      labels:
+        app: database-service
+    spec:
+      containers:
+        - name: database-service
+          image: database-service:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8768
+          env:
+            - name: SERVER_PORT
+              value: "8768"
+            - name: SPRING_DATASOURCE_URL
+              value: "jdbc:mariadb://localhost:3306/car_project_service"
+            - name: SPRING_DATASOURCE_USERNAME
+              value: "admin"
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: "admin"
+
+        - name: mariadb-database
+          image: mariadb:10.11
+          ports:
+            - containerPort: 3306
+          env:
+          - name: MARIADB_ALLOW_EMPTY_ROOT_PASSWORD
+            value: "yes"
+          - name: MARIADB_DATABASE
+            value: "car_project_service"
+          - name: MARIADB_USER
+            value: "admin"
+          - name: MARIADB_PASSWORD
+            value: "admin"
+
+          volumeMounts:
+            - name: mariadb-persistent-storage
+              mountPath: /var/lib/mysql
+      volumes:
+        - name: mariadb-persistent-storage
+          emptyDir: { }
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: database-service
+spec:
+  type: NodePort
+  selector:
+    app: database-service
+  ports:
+    - protocol: TCP
+      port: 8768
+      targetPort: 8768
+      nodePort: 30008
