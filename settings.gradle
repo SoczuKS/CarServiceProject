@@ -1,6 +1,5 @@
 rootProject.name = 'car-service-network'
 include ':dto'
-include 'server'
 include 'database-service'
 include 'user-service'
 include 'schedule-service'

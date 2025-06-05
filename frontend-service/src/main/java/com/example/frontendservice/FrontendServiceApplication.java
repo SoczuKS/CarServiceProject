@@ -7,7 +7,6 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
 @EnableFeignClients
-@EnableDiscoveryClient
 public class FrontendServiceApplication {
     public static void main(String[] args) {
         SpringApplication.run(FrontendServiceApplication.class, args);

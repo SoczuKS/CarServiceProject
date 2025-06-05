@@ -9,7 +9,12 @@ version = '0.0.1-SNAPSHOT'
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+    implementation 'org.springframework.cloud:spring-cloud-kubernetes-client-autoconfig:3.3.0'
+    implementation 'org.springframework.cloud:spring-cloud-starter-kubernetes-client-loadbalancer:3.3.0'
+    implementation 'org.springframework.cloud:spring-cloud-kubernetes-client-discovery:3.3.0'
+    implementation 'org.springframework.cloud:spring-cloud-starter-kubernetes-client:3.3.0'
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
     implementation project(':dto')
 }
