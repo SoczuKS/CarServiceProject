@@ -48,7 +48,7 @@ spec:
       volumes:
         - name: mariadb-persistent-storage
           emptyDir: { }
-
+      serviceAccountName: database-service
 
 ---
 apiVersion: v1
@@ -64,3 +64,85 @@ spec:
       port: 8768
       targetPort: 8768
       nodePort: 30008
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: database-service
+  namespace: default
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: endpoints-reader-database
+  namespace: default
+rules:
+  - apiGroups: [""]
+    resources: ["endpoints"]
+    verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: endpoints-reader-database-binding
+  namespace: default
+subjects:
+  - kind: ServiceAccount
+    name: database-service
+    namespace: default
+roleRef:
+  kind: Role
+  name: endpoints-reader-database
+  apiGroup: rbac.authorization.k8s.io
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: services-reader-database
+  namespace: default
+rules:
+  - apiGroups: [""]
+    resources: ["services"]
+    verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: services-reader-database-binding
+  namespace: default
+subjects:
+  - kind: ServiceAccount
+    name: database-service
+    namespace: default
+roleRef:
+  kind: Role
+  name: services-reader-database
+  apiGroup: rbac.authorization.k8s.io
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: pods-reader-database
+  namespace: default
+rules:
+  - apiGroups: [""]
+    resources: ["pods"]
+    verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: pods-reader-database-binding
+  namespace: default
+subjects:
+  - kind: ServiceAccount
+    name: database-service
+    namespace: default
+roleRef:
+  kind: Role
+  name: pods-reader-database
+  apiGroup: rbac.authorization.k8s.io
