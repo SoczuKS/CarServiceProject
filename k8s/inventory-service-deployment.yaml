@@ -21,6 +21,8 @@ spec:
           env:
             - name: SERVER_PORT
               value: "8762"
+      serviceAccountName: inventory-service
+
 ---
 apiVersion: v1
 kind: Service
@@ -35,3 +37,85 @@ spec:
       port: 8762
       targetPort: 8762
       nodePort: 30002
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: inventory-service
+  namespace: default
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: endpoints-reader-inventory
+  namespace: default
+rules:
+  - apiGroups: [""]
+    resources: ["endpoints"]
+    verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: endpoints-reader-inventory-binding
+  namespace: default
+subjects:
+  - kind: ServiceAccount
+    name: inventory-service
+    namespace: default
+roleRef:
+  kind: Role
+  name: endpoints-reader-inventory
+  apiGroup: rbac.authorization.k8s.io
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: services-reader-inventory
+  namespace: default
+rules:
+  - apiGroups: [""]
+    resources: ["services"]
+    verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: services-reader-inventory-binding
+  namespace: default
+subjects:
+  - kind: ServiceAccount
+    name: inventory-service
+    namespace: default
+roleRef:
+  kind: Role
+  name: services-reader-inventory
+  apiGroup: rbac.authorization.k8s.io
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: pods-reader-inventory
+  namespace: default
+rules:
+  - apiGroups: [""]
+    resources: ["pods"]
+    verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: pods-reader-inventory-binding
+  namespace: default
+subjects:
+  - kind: ServiceAccount
+    name: inventory-service
+    namespace: default
+roleRef:
+  kind: Role
+  name: pods-reader-inventory
+  apiGroup: rbac.authorization.k8s.io

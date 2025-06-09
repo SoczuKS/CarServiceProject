@@ -21,6 +21,8 @@ spec:
           env:
             - name: SERVER_PORT
               value: "8767"
+      serviceAccountName: car-service
+
 ---
 apiVersion: v1
 kind: Service
@@ -35,3 +37,85 @@ spec:
       port: 8767
       targetPort: 8767
       nodePort: 30007
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: car-service
+  namespace: default
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: endpoints-reader-car
+  namespace: default
+rules:
+  - apiGroups: [""]
+    resources: ["endpoints"]
+    verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: endpoints-reader-car-binding
+  namespace: default
+subjects:
+  - kind: ServiceAccount
+    name: car-service
+    namespace: default
+roleRef:
+  kind: Role
+  name: endpoints-reader-car
+  apiGroup: rbac.authorization.k8s.io
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: services-reader-car
+  namespace: default
+rules:
+  - apiGroups: [""]
+    resources: ["services"]
+    verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: services-reader-car-binding
+  namespace: default
+subjects:
+  - kind: ServiceAccount
+    name: car-service
+    namespace: default
+roleRef:
+  kind: Role
+  name: services-reader-car
+  apiGroup: rbac.authorization.k8s.io
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: pods-reader-car
+  namespace: default
+rules:
+  - apiGroups: [""]
+    resources: ["pods"]
+    verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: pods-reader-car-binding
+  namespace: default
+subjects:
+  - kind: ServiceAccount
+    name: car-service
+    namespace: default
+roleRef:
+  kind: Role
+  name: pods-reader-car
+  apiGroup: rbac.authorization.k8s.io
